@@ -4,11 +4,14 @@
 // defaults
 Route::view('/', 'welcome');
 Auth::routes(['register' => false]);
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('home', 'HomeController@index')->name('home');
 
-// user account control
-Route::get('/acc', 'UserController@edit');
-Route::put('/acc', 'UserController@update');
+// general user account control
+Route::get('acc', 'UserController@edit');
+Route::put('acc', 'UserController@update');
 
-// resources
-Route::resource('madadjus', 'MadadjuController');
+// master user control
+Route::get('users/{type}', 'UserController@index');
+Route::post('users', 'UserController@store');
+Route::put('acc/{user}', 'UserController@update_password');
+Route::delete('acc/{user}', 'UserController@destroy');

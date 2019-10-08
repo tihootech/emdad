@@ -33,6 +33,9 @@ body {
 	font-family: 'Yekan', 'Calibri';
 	direction: rtl;
 	text-align: right;
+}
+
+* {
 	font-size: 14px;
 }
 
