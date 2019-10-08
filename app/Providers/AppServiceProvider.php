@@ -24,6 +24,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+        \Schema::defaultStringLength(191);
+
         Blade::if('operator', function () {
             $user = auth()->user();
             return $user && ($user->type == 'operator' || $user->type == 'master');
@@ -31,6 +34,10 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('master', function () {
             $user = auth()->user();
             return $user && $user->type == 'master';
+        });
+        Blade::if('onlyorgan', function () {
+            $user = auth()->user();
+            return $user && $user->type == 'organ';
         });
     }
 }

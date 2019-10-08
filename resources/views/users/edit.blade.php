@@ -48,10 +48,7 @@
 					<hr class="w-100">
 
 					<div class="col-md-2">
-						<button type="submit" class="btn btn-primary btn-block">
-							<i class="fa fa-check ml-1"></i>
-							تایید
-						</button>
+						@include('partials.submit')
 					</div>
 
 				</form>

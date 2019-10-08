@@ -15,3 +15,6 @@ Route::get('users/{type}', 'UserController@index');
 Route::post('users', 'UserController@store');
 Route::put('acc/{user}', 'UserController@update_password');
 Route::delete('acc/{user}', 'UserController@destroy');
+
+// resources
+Route::resource('madadju', 'MadadjuController')->except('show');

@@ -22,11 +22,14 @@
                                     </a>
                                     <hr>
                                 @endmaster
-                                <a href="{{url('madadjus')}}" class="btn btn-outline-light mx-1">
+                                <a href="{{url('madadju')}}" class="btn btn-outline-light mx-1">
                                     <i class="fa fa-male ml-1"></i>
                                     مدیریت مدد جویان
                                 </a>
                             @endoperator
+                            @onlyorgan
+                                در دست ساخت
+                            @endonlyorgan
                         </div>
                     </div>
                 </div>
