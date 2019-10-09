@@ -15,7 +15,7 @@
             </a>
         </li>
 
-        @include('dashboard.aside.'.auth()->user()->type.'_aside')
+        @include('dashboard.panel')
 
     </ul>
 </aside>

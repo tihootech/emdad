@@ -1,17 +1,16 @@
-@extends('layouts.app')
-@section('content')
+@extends('layouts.dashboard')
+@section('main')
 
-	<div class="container">
-
-		<div class="card mb-3">
-			<div class="card-body text-left">
-				<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#NewUserModal">
-					<i class="fa fa-user-plus ml-1"></i>
-					تعریف {{$persian_type}} جدید
-				</button>
-			</div>
+	<div class="card mb-3">
+		<div class="card-body text-left">
+			<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#NewUserModal">
+				<i class="fa fa-user-plus ml-1"></i>
+				تعریف {{$persian_type}} جدید
+			</button>
 		</div>
+	</div>
 
+	<div class="tile">
 		@if ($users->count())
 			<table class="table table-bordered table-hover table-striped">
 				<thead>

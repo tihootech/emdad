@@ -1,0 +1,7 @@
+@font-face { font-family: 'OpenSans'; src: url('../fonts/OpenSans.ttf'); }
+@font-face { font-family: 'Yekan'; src: url('../fonts/Yekan.woff'); }
+@font-face { font-family: 'Dinar'; src: url('../fonts/Dinar.ttf'); }
+
+.dinar { font-family: 'Dinar' }
+.yekan { font-family: 'Yekan' }
+.open-sans { font-family: 'OpenSans' }
