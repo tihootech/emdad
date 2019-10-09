@@ -8,10 +8,10 @@
 
     <!-- Navbar Right Menu-->
     <ul class="app-nav">
-        <li class="app-search">
+        {{-- <li class="app-search">
             <input class="app-search__input" type="search" placeholder="جستجو">
             <button class="app-search__button"><i class="fa fa-search"></i></button>
-        </li>
+        </li> --}}
         <!--Notification Menu-->
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-bell-o fa-lg"></i></a>
             <ul class="app-notification dropdown-menu text-right">
@@ -21,7 +21,7 @@
         <!-- User Menu-->
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
             <ul class="dropdown-menu settings-menu text-right">
-                <li><a class="dropdown-item" href="{{url("acc")}}"><i class="fa fa-user fa-lg"></i> پروفایل </a></li>
+                <li><a class="dropdown-item" href="{{url("acc")}}"><i class="fa fa-user fa-lg"></i> مدیریت حساب کاربری </a></li>
                 <li>
                     <a class="dropdown-item pointer" onclick="document.getElementById('logout-form').submit();">
                         <i class="fa fa-sign-out ml-1"></i> خروج
@@ -31,6 +31,10 @@
                     </form>
                 </li>
             </ul>
+        </li>
+
+        <li class="nav-item">
+            <a href="{{url("home")}}" class="app-nav__item"> <i class="fa fa-dashboard"></i> </a>
         </li>
 
         <li class="nav-item">
