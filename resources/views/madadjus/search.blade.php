@@ -30,7 +30,7 @@
 
 	<hr>
 
-	<div class="row">
+	<div class="row justify-content-center">
 		<div class="col-md-3 form-group">
 			<label for="full-name"> نام یا نام خانوادگی </label>
 			<input type="text" class="form-control" id="full-name" name="full_name" value="{{request('full_name')}}">
@@ -65,6 +65,14 @@
 				<option value=""> -- همه موارد -- </option>
 				<option @if( request('married') === '0' ) selected @endif value="0"> مجرد </option>
 				<option @if( request('married') === '1' ) selected @endif value="1"> متاهل </option>
+			</select>
+		</div>
+		<div class="col-md-3 form-group">
+			<label for="military-status"> <small><i class="fa fa-asterisk ml-1 text-danger"></i></small> وضعیت نظام وظیفه </label>
+			<select class="form-control" name="military_status" id="military-status" required>
+				<option value=""> -- همه موارد -- </option>
+				<option @if( request('military_status') == 'مشمول خدمت' ) selected @endif > مشمول خدمت </option>
+				<option @if( request('military_status') == 'معاف یا پایان خدمت' ) selected @endif > معاف یا پایان خدمت </option>
 			</select>
 		</div>
 	</div>

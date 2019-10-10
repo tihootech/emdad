@@ -107,7 +107,10 @@
 
 			<div class="col-md-3 form-group">
 				<label for="military-status"> <small><i class="fa fa-asterisk ml-1 text-danger"></i></small> وضعیت نظام وظیفه </label>
-				<input type="text" class="form-control" id="military-status" name="military_status" value="{{old('military_status') ?? $madadju->military_status}}" required>
+				<select class="form-control" name="military_status" id="military-status" required>
+					<option @if((old('military_status') ?? $madadju->military_status) == 'مشمول خدمت') selected @endif > مشمول خدمت </option>
+					<option @if((old('military_status') ?? $madadju->military_status) == 'معاف یا پایان خدمت') selected @endif > معاف یا پایان خدمت </option>
+				</select>
 			</div>
 
 			<div class="col-md-3 form-group">

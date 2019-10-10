@@ -75,6 +75,11 @@ class MadadjuController extends Controller
             $query = $query->where('married', $request->married);
         }
 
+        // military status
+        if ($phrase = $request->military_status) {
+            $query = $query->where('military_status', $phrase);
+        }
+
         $madadjus = $query->paginate(25);
         $organs = User::where('type', 'organ')->get();
         return view('madadjus.index', compact('madadjus', 'organs'));
