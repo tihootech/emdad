@@ -19,6 +19,11 @@ class Madadju extends Model
         return $this->hasMany(Introduce::class);
     }
 
+    public function introduced($organ_id)
+    {
+        return Introduce::where('organ_id', $organ_id)->where('madadju_id', $this->id)->first() ? true : false;
+    }
+
     public function age()
     {
         if ($this->birthday) {

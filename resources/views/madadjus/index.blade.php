@@ -35,7 +35,6 @@
 						<th scope="col"> موبایل </th>
 						<th scope="col"> وضعیت تاهل </th>
 						<th scope="col"> وضعیت نظام وظیفه </th>
-						<th scope="col"> نام سرپرست </th>
 						<th scope="col" colspan="3"> عملیات </th>
 					</tr>
 				</thead>
@@ -56,7 +55,6 @@
 							<td>{{$madadju->mobile ?? '-'}}</td>
 							<td>{{$madadju->married ? 'متاهل' : 'مجرد'}}</td>
 							<td>{{$madadju->military_status ?? '-'}}</td>
-							<td>{{$madadju->warden_name ?? '-'}}</td>
 							<td>
 								<a href="{{url("madadju/$madadju->id")}}" class="btn btn-sm btn-outline-primary" data-toggle="popover" data-content="جزییات" data-trigger="hover" data-placement="top">
 									<i class="fa fa-list ml-1"></i>

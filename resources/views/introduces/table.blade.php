@@ -62,7 +62,7 @@
 									<button type="submit" class="btn btn-outline-success btn-block"> تغییر وضعیت </button>
 								</div>
 							</div>
-							<input type="text" name="information" id="information" class="form-control mt-3 hidden" placeholder="توضیحات">
+							<input type="text" name="information" id="information" class="form-control mt-3 hidden" placeholder="علت رد کردن">
 
 						</form>
 					</td>

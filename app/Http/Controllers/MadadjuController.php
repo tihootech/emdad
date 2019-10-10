@@ -16,6 +16,7 @@ class MadadjuController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('organ')->only('show');
         $this->middleware('operator')->except('show');
     }
 
@@ -81,6 +82,9 @@ class MadadjuController extends Controller
 
     public function show(Madadju $madadju)
     {
+        if (only_organ() && !$madadju->introduced(auth()->id())) {
+            abort(404);
+        }
         return view('madadjus.show', compact('madadju'));
     }
 
