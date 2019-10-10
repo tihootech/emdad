@@ -15291,3 +15291,6 @@ input[type=number]::-webkit-inner-spin-button:after {
 .bg-green-light {
     background-color: #b4ffb9;
 }
+.searchbox-width {
+    min-width:200px;
+}

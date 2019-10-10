@@ -22,11 +22,13 @@ class MadadjuController extends Controller
     public function index(Request $request)
     {
         $query = Madadju::query();
-        if ($request->full_name) {
-            $phrase = $request->full_name_type == 'like' ? "%$request->full_name%" : $request->full_name;
-            $query = $query->where('full_name', $request->full_name_type, $phrase);
+
+        // national code
+        if ($phrase = $request->national_code) {
+            $query = $query->where('national_code', 'like', "$phrase%");
         }
 
+        // age
         if ($request->age) {
 
             $query = $query->whereRaw("TIMESTAMPDIFF(YEAR, birthday, CURDATE()) >= $request->age");
@@ -34,8 +36,6 @@ class MadadjuController extends Controller
 
         }elseif ($request->age_1 || $request->age_2) {
 
-            // $date1 = Carbon::now()->subYears($request->age_1);
-            // $date2 = $request->age_2 ? Carbon::now()->subYears($request->age_2) : null;
             $query = $query->whereNotNull('birthday');
 
             if ($request->age_1) {
@@ -45,15 +45,33 @@ class MadadjuController extends Controller
                 $query = $query->whereRaw("TIMESTAMPDIFF(YEAR, birthday, CURDATE()) < $request->age_2");
             }
 
-            // $query = $query->whereAge('birthday', '>=', 20);
         }
 
-        if ($request->national_code) {
-            $query = $query->where('national_code', 'like', "$request->national_code%");
+        // first name or last name
+        if ($phrase = $request->full_name) {
+            $query = $query->where(function ($query) use ($phrase) {
+                $query->where('first_name', 'like', "%$phrase%")->orWhere('last_name', 'like', "%$phrase%");
+            });
         }
 
-        if ($request->description) {
-            $query = $query->whereNotNull('description');
+        // gender
+        if ($request->male !== null) {
+            $query = $query->where('male', $request->male);
+        }
+
+        // education grade
+        if ($phrase = $request->education_grade) {
+            $query = $query->where('education_grade', $phrase);
+        }
+
+        // education filed
+        if ($phrase = $request->education_filed) {
+            $query = $query->where('education_filed', $phrase);
+        }
+
+        // married or single
+        if ($request->married != null) {
+            $query = $query->where('married', $request->married);
         }
 
         $madadjus = $query->paginate(25);
