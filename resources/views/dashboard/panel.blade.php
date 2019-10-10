@@ -48,3 +48,10 @@
 		</ul>
 	</li>
 @endoperator
+
+<li>
+	<a class="app-menu__item @if(active('introduce')) active @endif" href="{{url("introduce")}}">
+		<i class="app-menu__icon fa fa-list"></i>
+		<span class="app-menu__label"> لیست معرفی شدگان </span>
+	</a>
+</li>

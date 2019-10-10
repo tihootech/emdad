@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class CheckOperator
+class CheckOrgan
 {
     /**
      * Handle an incoming request.
@@ -15,7 +15,7 @@ class CheckOperator
      */
     public function handle($request, Closure $next)
     {
-        if ( operator() ) {
+        if ( organ() ) {
             return $next($request);
         }else {
             return redirect('login');

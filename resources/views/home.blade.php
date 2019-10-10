@@ -27,13 +27,25 @@
                                     مدیریت مدد جویان
                                 </a>
                             @endoperator
-                            @onlyorgan
-                                در دست ساخت
-                            @endonlyorgan
+                            @only_organ
+                                <a href="{{url('introduce')}}" class="btn btn-outline-light mx-1">
+                                    <i class="fa fa-list ml-1"></i>
+                                    لیست کامل افراد معرفی شده
+                                </a>
+                            @endonly_organ
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    @only_organ
+        @if ($user->fresh_introduces->count())
+            <div class="tile mt-4">
+                @include('introduces.table', ['introduces'=>$user->fresh_introduces])
+            </div>
+        @endif
+    @endonly_organ
+
 @endsection

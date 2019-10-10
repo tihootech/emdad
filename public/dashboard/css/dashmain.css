@@ -5939,7 +5939,7 @@ button.close {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: "Dinar", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "Yekan", "Dinar", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -15249,59 +15249,12 @@ be a descendant of the grid when it is being dragged.
     white-space: nowrap;
     overflow-x: auto;
 }
-.pointer {
+.pointer, [data-check] {
     cursor : pointer;
 }
 .hidden {
     display: none;
 }
-.current-photos {
-    text-align: left;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-}
-.product-images img {
-    float: right;
-    display: inline;
-    max-width: 100px;
-}
-
-.map {
-    width:100%;
-    height: 300px;
-}
-
-.sections-fixed-bottom {
-    height: 115px;
-    overflow-y: auto;
-    display: none;
-}
-
-.sections-fixed-bottom button#submit {
-    position: absolute;
-    left: 10px;
-    z-index: 999;
-    margin: 10px;
-    padding: 20px;
-    border-radius: 50%;
-}
-
-.inputs-at-bottom {
-    display: inline-block;
-    width: 200px;
-    margin: 10px;
-    position: relative;
-}
-
-.inputs-at-bottom i.fa-times {
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    cursor: pointer;
-}
-
-
 input[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     cursor:pointer;
@@ -15311,7 +15264,6 @@ input[type=number]::-webkit-inner-spin-button {
     text-align:center;
     position:relative;
 }
-
 input[type=number]::-webkit-inner-spin-button:before,
 input[type=number]::-webkit-inner-spin-button:after {
     content: "^";
@@ -15320,31 +15272,22 @@ input[type=number]::-webkit-inner-spin-button:after {
     font-family:monospace;
     line-height:
 }
-
 input[type=number]::-webkit-inner-spin-button:before {
     top:0px;
 }
-
 input[type=number]::-webkit-inner-spin-button:after {
     bottom:0px;
     -webkit-transform: rotate(180deg);
 }
-
 .one-half {
     font-size : 1.5em !important;
 }
-
 .one-25 {
     font-size : 1.25em !important;
 }
-
-.perform-new-course{
-    border: 2px dashed #555;
-    min-height: 100px;
+.bg-red-light {
+    background-color: #ffb4b4;
 }
-
-.custom-badge {
-    padding: 5px 10px;
-    border-radius: 10px;
-    display: inline-block;
+.bg-green-light {
+    background-color: #b4ffb9;
 }

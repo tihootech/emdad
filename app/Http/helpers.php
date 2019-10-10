@@ -11,3 +11,33 @@ function expanded($array)
     $path = request()->path();
     return in_array($path.$query,$array);
 }
+
+
+function select_old($key, $value, $object)
+{
+    return old($key) === null ? $object->$key === $value : old($key) == $value;
+}
+
+function master()
+{
+    $user = auth()->user();
+    return $user && $user->type == 'master';
+}
+
+function operator()
+{
+    $user = auth()->user();
+    return $user && ($user->type =='operator' || $user->type == 'master');
+}
+
+function organ()
+{
+    $user = auth()->user();
+    return $user && ($user->type == 'organ' || $user->type =='operator' || $user->type == 'master');
+}
+
+function only_organ()
+{
+    $user = auth()->user();
+    return $user && $user->type == 'organ';
+}

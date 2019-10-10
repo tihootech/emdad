@@ -15,11 +15,10 @@ class CheckOnlyOrgan
      */
     public function handle($request, Closure $next)
     {
-        $user = auth()->user();
-        if ($user->type == 'organ') {
+        if ( only_organ() ) {
             return $next($request);
         }else {
-            abort(404);
+            return redirect('login');
         }
     }
 }

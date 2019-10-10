@@ -16,5 +16,9 @@ Route::post('users', 'UserController@store');
 Route::put('acc/{user}', 'UserController@update_password');
 Route::delete('acc/{user}', 'UserController@destroy');
 
-// resources
-Route::resource('madadju', 'MadadjuController')->except('show');
+// madadjus and introduces
+Route::resource('madadju', 'MadadjuController');
+Route::post('introduce', 'IntroduceController@introduce');
+Route::get('introduce', 'IntroduceController@index');
+Route::delete('introduce/{introduce}', 'IntroduceController@destroy');
+Route::post('introduce/status/{introduce}', 'IntroduceController@change_status');

@@ -63,6 +63,7 @@ class Kernel extends HttpKernel
         'operator' => \App\Http\Middleware\CheckOperator::class,
         'master' => \App\Http\Middleware\CheckMaster::class,
         'only_organ' => \App\Http\Middleware\CheckOnlyOrgan::class,
+        'organ' => \App\Http\Middleware\CheckOrgan::class,
     ];
 
     /**

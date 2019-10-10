@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Madadju;
+use App\User;
+use App\Introduce;
 use App\Rules\NationalCode;
 use App\Rules\PersianDate;
 use Illuminate\Http\Request;
@@ -13,6 +15,7 @@ class MadadjuController extends Controller
 
     public function __construct()
     {
+        $this->middleware('auth');
         $this->middleware('operator');
     }
 
@@ -54,7 +57,8 @@ class MadadjuController extends Controller
         }
 
         $madadjus = $query->paginate(25);
-        return view('madadjus.index', compact('madadjus'));
+        $organs = User::where('type', 'organ')->get();
+        return view('madadjus.index', compact('madadjus', 'organs'));
     }
 
     public function create()
@@ -91,15 +95,33 @@ class MadadjuController extends Controller
     public static function validation($id=0)
     {
         $data =  request()->validate([
-            "full_name" => "required|string",
-            "father_name" => "nullable|string",
+            "first_name" => "required|string",
+            "last_name" => "required|string",
+            "national_code" => [
+                "required",
+                "unique:madadjus,national_code,$id",
+                new NationalCode,
+            ],
             "birthday" => [
                 "nullable",
                 new PersianDate
             ],
-            "national_code" => [
+            "male" => "required|boolean",
+            "education_grade" => "required|string",
+            "education_field" => "nullable|string",
+            "skill" => "nullable|string",
+            "favourites" => "nullable|string",
+            "region" => "nullable|integer",
+            "insurance_number" => "nullable|string",
+            "telephone" => "nullable|string",
+            "mobile" => "required|string",
+            "married" => "required|boolean",
+            "military_status" => "required|string",
+            "warden_name" => "required|string",
+            "muid" => "required|string",
+            "address" => "required|string",
+            "warden_national_code" => [
                 "required",
-                "unique:madadjus,national_code,$id",
                 new NationalCode,
             ],
         ]);

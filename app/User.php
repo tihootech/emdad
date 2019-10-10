@@ -10,21 +10,16 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'name', 'username', 'password', 'type'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function fresh_introduces()
+    {
+        return $this->hasMany(Introduce::class, 'organ_id')->where('status', 1);
+    }
 }

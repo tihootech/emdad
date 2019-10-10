@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
             $user = auth()->user();
             return $user && $user->type == 'master';
         });
-        Blade::if('onlyorgan', function () {
+        Blade::if('only_organ', function () {
             $user = auth()->user();
             return $user && $user->type == 'organ';
         });

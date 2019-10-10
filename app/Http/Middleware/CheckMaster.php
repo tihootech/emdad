@@ -15,11 +15,10 @@ class CheckMaster
      */
     public function handle($request, Closure $next)
     {
-        $user = auth()->user();
-        if ($user->type == 'master') {
+        if ( master() ) {
             return $next($request);
         }else {
-            abort(404);
+            return redirect('login');
         }
     }
 }
