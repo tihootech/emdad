@@ -43,7 +43,7 @@
 							</form>
 						</td>
 					@else
-						<em>-</em>
+						<td> - </td>
 					@endif
 				@endoperator
 				@only_organ

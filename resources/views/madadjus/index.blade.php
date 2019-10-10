@@ -127,13 +127,7 @@
 								</a>
 							</td>
 							<td class="text-center">
-								<form action="{{url("madadju/$madadju->id")}}" method="post" id="delete-madadju-{{$madadju->id}}">
-									@method('DELETE')
-									@csrf
-									<button type="button" class="btn btn-sm btn-outline-danger delete" data-toggle="popover" data-content="حذف" data-trigger="hover" data-placement="top" data-target="delete-madadju-{{$madadju->id}}">
-										<i class="fa fa-trash ml-1"></i>
-									</button>
-								</form>
+								@include('partials.delete', ['key' => 'madadju', 'dtype'=>'hover', 'btn_sm'=>true])
 							</td>
 						</tr>
 					@endforeach

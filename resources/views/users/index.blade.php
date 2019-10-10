@@ -39,10 +39,10 @@
 								</form>
 							</td>
 							<td class="text-center">
-								<form action="{{url("acc/$user->id")}}" method="post">
+								<form action="{{url("acc/$user->id")}}" method="post" id="delete-user-{{$user->id}}">
 									@method('DELETE')
 									@csrf
-									<button type="submit" class="btn btn-danger" onclick="if (!confirm('آیا مطمئن هستید؟')) return false;">
+									<button type="button" class="btn btn-danger delete" data-target="delete-user-{{$user->id}}">
 										<i class="fa fa-trash ml-1"></i> حذف دائمی
 									</button>
 								</form>

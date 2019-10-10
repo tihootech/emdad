@@ -16,7 +16,7 @@ class MadadjuController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('operator');
+        $this->middleware('operator')->except('show');
     }
 
     public function index(Request $request)
@@ -59,6 +59,11 @@ class MadadjuController extends Controller
         $madadjus = $query->paginate(25);
         $organs = User::where('type', 'organ')->get();
         return view('madadjus.index', compact('madadjus', 'organs'));
+    }
+
+    public function show(Madadju $madadju)
+    {
+        return view('madadjus.show', compact('madadju'));
     }
 
     public function create()
