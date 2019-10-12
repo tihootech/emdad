@@ -53,6 +53,6 @@ class NationalCode implements Rule
      */
     public function message()
     {
-        return 'کد ملی وارد شده صحیح نیست';
+        return ':attribute صحیح نیست';
     }
 }

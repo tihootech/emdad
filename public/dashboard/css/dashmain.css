@@ -15294,3 +15294,14 @@ input[type=number]::-webkit-inner-spin-button:after {
 .searchbox-width {
     min-width:200px;
 }
+
+/*******************************/
+/* RTL */
+/*******************************/
+.custom-control-label::before, .custom-control-label::after {
+	left: unset;
+}
+
+.custom-control-label > span {
+	padding-right: 25px;
+}

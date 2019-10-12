@@ -27,7 +27,7 @@
 					<td> {{$introduce->organ ? $introduce->organ->name : '-'}} </td>
 					<td> {{$introduce->operator ? $introduce->operator->name : '-'}} </td>
 				@endoperator
-				<td @if($introduce->information) data-toggle="popover" data-content="{{$introduce->information}}" data-trigger="hover" data-placement="top" @endif>
+				<td @if($introduce->information) data-toggle="popover" data-content="{{$introduce->information}}" data-trigger="hover" data-placement="top" @endif class="@if($introduce->status == 1) text-warning @elseif($introduce->status == 2) text-success @else text-danger @endif" >
 					{{$introduce->status_name()}}
 				</td>
 				<td> {{date_picker_date($introduce->created_at)}} </td>

@@ -69,7 +69,7 @@
 		</div>
 		<div class="col-md-3 form-group">
 			<label for="military-status"> <small><i class="fa fa-asterisk ml-1 text-danger"></i></small> وضعیت نظام وظیفه </label>
-			<select class="form-control" name="military_status" id="military-status" required>
+			<select class="form-control" name="military_status" id="military-status">
 				<option value=""> -- همه موارد -- </option>
 				<option @if( request('military_status') == 'مشمول خدمت' ) selected @endif > مشمول خدمت </option>
 				<option @if( request('military_status') == 'معاف یا پایان خدمت' ) selected @endif > معاف یا پایان خدمت </option>

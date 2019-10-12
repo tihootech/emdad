@@ -20,7 +20,7 @@
 
 	<div class="tile">
 		@if ($madadjus->count())
-			<table class="table table-bordered table-hover table-striped table-sm table-responsive">
+			<table class="table table-bordered table-hover table-striped table-sm table-responsive-lg">
 				<thead>
 					<tr>
 						<th scope="col">#</th>
@@ -35,6 +35,7 @@
 						<th scope="col"> موبایل </th>
 						<th scope="col"> وضعیت تاهل </th>
 						<th scope="col"> وضعیت نظام وظیفه </th>
+						<th scope="col"> تعداد معرفی </th>
 						<th scope="col" colspan="3"> عملیات </th>
 					</tr>
 				</thead>
@@ -43,7 +44,7 @@
 						<tr>
 							<th scope="row">{{$index+1}}</th>
 							<td> <i class="fa fa-square-o" data-checked="0" data-check="{{$madadju->id}}"></i> </td>
-							<td class="@if($madadju->introduces->count()) bg-red-light @else bg-green-light @endif" data-toggle="popover" data-content="@if($madadju->introduces->count()) معرفی شده @else معرفی نشده @endif" data-trigger="hover" data-placement="top">
+							<td class="@if($madadju->introduces->count()) bg-red-light @endif" data-toggle="popover" data-content="@if($madadju->introduces->count()) معرفی شده @else معرفی نشده @endif" data-trigger="hover" data-placement="top">
 								{{$madadju->full_name() }}
 							</td>
 							<td>{{$madadju->national_code ?? '-'}}</td>
@@ -55,6 +56,9 @@
 							<td>{{$madadju->mobile ?? '-'}}</td>
 							<td>{{$madadju->married ? 'متاهل' : 'مجرد'}}</td>
 							<td>{{$madadju->military_status ?? '-'}}</td>
+							<td @unless($madadju->icount) class="text-success" @endunless>
+								{{$madadju->icount ? $madadju->icount : 'صفر'}}
+							</td>
 							<td>
 								<a href="{{url("madadju/$madadju->id")}}" class="btn btn-sm btn-outline-primary" data-toggle="popover" data-content="جزییات" data-trigger="hover" data-placement="top">
 									<i class="fa fa-list ml-1"></i>

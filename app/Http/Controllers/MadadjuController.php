@@ -80,7 +80,10 @@ class MadadjuController extends Controller
             $query = $query->where('military_status', $phrase);
         }
 
-        $madadjus = $query->paginate(25);
+        $query = $query->leftJoin('introduces', 'madadjus.id', '=', 'introduces.madadju_id')
+            ->select('madadjus.*', \DB::raw("COUNT(introduces.madadju_id) AS icount"))->groupBy('madadjus.id');
+
+        $madadjus = $query->orderBy('icount')->paginate(25);
         $organs = User::where('type', 'organ')->get();
         return view('madadjus.index', compact('madadjus', 'organs'));
     }
@@ -120,6 +123,7 @@ class MadadjuController extends Controller
 
     public function destroy(Madadju $madadju)
     {
+        Introduce::where('madadju_id', $madadju->id)->delete();
         $madadju->delete();
         return back()->withMessage('مددجوی موردنظر از سیستم حذف شد.');
     }
@@ -145,12 +149,12 @@ class MadadjuController extends Controller
             "favourites" => "nullable|string",
             "region" => "nullable|integer",
             "insurance_number" => "nullable|string",
-            "telephone" => "nullable|string",
-            "mobile" => "required|string",
+            "telephone" => "nullable|string|digits:11",
+            "mobile" => "required|string|digits:11",
             "married" => "required|boolean",
             "military_status" => "required|string",
             "warden_name" => "required|string",
-            "muid" => "required|string",
+            "muid" => "required|string|unique:madadjus,muid,$id",
             "address" => "required|string",
             "warden_national_code" => [
                 "required",

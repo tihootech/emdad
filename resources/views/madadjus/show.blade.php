@@ -8,7 +8,7 @@
 			@if ($madadju->introduces->count())
 				<ul>
 					@foreach ($madadju->introduces as $introduce)
-						<li>
+						<li class="my-2">
 							در تاریخ
 							<b class="text-info mx-1"> {{human_date($introduce->crated_at)}} </b>
 							به موسسه

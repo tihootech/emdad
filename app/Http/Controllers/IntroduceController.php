@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Introduce;
 use App\User;
+use App\Madadju;
 
 class IntroduceController extends Controller
 {
@@ -16,16 +17,47 @@ class IntroduceController extends Controller
 		$this->middleware('operator')->only(['introduce','destroy']);
 	}
 
-	public function index()
+	public function index(Request $request)
 	{
+
 		if ( only_organ() ) {
 			$introduces = Introduce::where('organ_id', auth()->id())->latest()->paginate(25);
 		}elseif ( operator() ) {
-			$introduces = Introduce::latest()->paginate(25);
+
+			$query = Introduce::query();
+
+			if ( $request->madadjus && is_array($request->madadjus) ) {
+				$query = $query->whereIn('madadju_id', $request->madadjus);
+			}
+			if ( $request->organs && is_array($request->organs) ) {
+				$query = $query->whereIn('organ_id', $request->organs);
+			}
+			if ( $request->operators && is_array($request->operators) ) {
+				$query = $query->whereIn('operator_id', $request->operators);
+			}
+			if ( $request->status && is_array($request->status) ) {
+				$query = $query->whereIn('status', $request->status);
+			}
+			if ($request->from) {
+				$from = persian_to_carbon($request->from);
+				$query = $query->where('created_at', '>=', $from);
+			}
+			if ($request->till) {
+				$till = persian_to_carbon($request->till);
+				$query = $query->where('created_at', '<', $till);
+			}
+
+			$introduces = $query->latest()->paginate(25);
+
 		}else {
 			abort(404);
 		}
-		return view('introduces.index', compact('introduces'));
+
+		$madadjus = Madadju::all();
+		$organs = User::whereType('organ')->get();
+		$operators = User::whereType('operator')->get();
+
+		return view('introduces.index', compact('introduces','madadjus', 'organs', 'operators'));
 	}
 
 	public function introduce(Request $request)

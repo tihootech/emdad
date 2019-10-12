@@ -21,6 +21,7 @@
 			</li>
 		</ul>
 	</li>
+
 @endmaster
 
 
@@ -55,3 +56,14 @@
 		<span class="app-menu__label"> لیست معرفی شدگان </span>
 	</a>
 </li>
+
+@master
+
+	<li>
+		<a class="app-menu__item @if(active('notifications/create')) active @endif" href="{{url("notifications/create")}}">
+			<i class="app-menu__icon fa fa-bullhorn"></i>
+			<span class="app-menu__label"> اطلاع رسانی </span>
+		</a>
+	</li>
+
+@endmaster

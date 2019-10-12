@@ -147,10 +147,9 @@ return [
         'current_password' => 'رمزعبور فعلی',
         'owner_name'=> 'نام صاحب حساب',
         'name'=> 'نام',
+        'muid'=> 'کدمددجویی',
         'postcode'=> 'کدپستی',
-        'image_path.*'=> 'تصویر آپلود شده',
-        'logo_path.*'=> 'لوگو آپلود شده',
-        'bg_path.*'=> 'تصویر پس زمینه آپلود شده',
+        'warden_national_code'=> 'کدملی سرپرست',
     ],
 
 ];

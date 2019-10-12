@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
         });
 
         App\User::create([
-            'name' => 'کمیته امداد امام خمینی',
+            'name' => 'متصدی اصلی',
             'username' => 'master',
             'password' => bcrypt('master'),
             'type' => 'master',
