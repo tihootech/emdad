@@ -14,7 +14,7 @@ class IntroduceController extends Controller
 	{
 		$this->middleware('auth');
 		$this->middleware('organ');
-		$this->middleware('operator')->only(['introduce','destroy']);
+		$this->middleware('operator')->only(['introduce','destroy', 'confirm']);
 	}
 
 	public function index(Request $request)
@@ -78,11 +78,28 @@ class IntroduceController extends Controller
 
 	public function change_status(Introduce $introduce, Request $request)
 	{
-		$request->validate(['status'=>'required|integer']);
+		if ($request->status == 3) {
+			$request->validate(['status'=>'required|integer','information' => 'required|string']);
+			$introduce->confirmed = 0;
+			$introduce->information = $request->information;
+			$message = 'درخواست شمادر دست بررسی قرار گرفت.';
+		}else {
+			$request->validate(['status'=>'required|integer']);
+			$message = 'تغییر وضعیت انجام شد.';
+			$introduce->information = null;
+		}
 		$introduce->status = $request->status;
-		$introduce->information = $request->information;
 		$introduce->save();
-		return back()->withMessage('تغییر وضعیت انجام شد.');
+		return back()->withMessage($message);
+	}
+
+	public function confirm(Introduce $introduce, Request $request)
+	{
+		$request->validate(['confirmed'=>'required']);
+		$introduce->status = $request->confirmed ? 3 : 2;
+		$introduce->confirmed = 1;
+		$introduce->save();
+		return back()->withMessage('عملیات با موفقیت انجام شد.');
 	}
 
 	public function destroy(Introduce $introduce)

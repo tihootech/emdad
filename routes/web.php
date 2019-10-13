@@ -21,6 +21,7 @@ Route::resource('madadju', 'MadadjuController');
 Route::post('introduce', 'IntroduceController@introduce');
 Route::get('introduce', 'IntroduceController@index');
 Route::delete('introduce/{introduce}', 'IntroduceController@destroy');
+Route::post('introduce/confirm/{introduce}', 'IntroduceController@confirm');
 Route::post('introduce/status/{introduce}', 'IntroduceController@change_status');
 
 // notifications

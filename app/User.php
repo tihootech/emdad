@@ -22,4 +22,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Introduce::class, 'organ_id')->where('status', 1);
     }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
+
+    public function fresh_notifications()
+    {
+        return $this->hasMany(Notification::class)->whereRead(0);
+    }
 }

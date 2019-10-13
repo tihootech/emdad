@@ -49,4 +49,38 @@
         @endif
     @endonly_organ
 
+    @operator
+        @if ($rejects->count())
+            <div class="tile mt-4">
+                <h5 class="mb-4"> مددجویان رد شده توسط مووسات </h5>
+                @foreach ($rejects as $introduce)
+                    <div class="card my-3">
+
+                        <div class="card-body">
+                            <a href="{{url("madadju/$introduce->madadju_id")}}" class="mx-1"> {{$introduce->madadju->full_name()}} </a>
+                            که در تاریخ
+                            <em class="text-info mx-1"> {{human_date($introduce->created_at)}} </em>
+                            به موسسه
+                            <b class="text-info mx-1"> {{$introduce->organ->name ?? '-'}} </b>
+                            معرفی شده بود، توسط این موسسه رد شد.
+                            علت رد شدن : <span class="text-danger"> {{$introduce->information}} </span>
+                        </div>
+                        <div class="card-footer">
+                            <form class="text-left" action="{{url("introduce/confirm/$introduce->id")}}" method="post">
+                                @csrf
+                                <button type="submit" name="confirmed" value="1" class="btn btn-outline-success btn-sm mr-2" data-toggle="popover" data-content="با تایید درخواست این موسسه وضعیت شخص به رد شده تغییر پیدا میکند." data-trigger="hover" data-placement="top">
+                                    <i class="fa fa-check ml-1"></i>
+                                </button>
+                                <button type="submit" name="confirmed" value="0" class="btn btn-outline-danger btn-sm mr-2" data-toggle="popover" data-content="با رد کرد درخواست این موسسه وضعیت شخص به تایید شده بازمیگردد" data-trigger="hover" data-placement="top">
+                                    <i class="fa fa-times ml-1"></i>
+                                </button>
+                            </form>
+                        </div>
+
+                    </div>
+                @endforeach
+            </div>
+        @endif
+    @endoperator
+
 @endsection

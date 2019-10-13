@@ -27,8 +27,18 @@
 					<td> {{$introduce->organ ? $introduce->organ->name : '-'}} </td>
 					<td> {{$introduce->operator ? $introduce->operator->name : '-'}} </td>
 				@endoperator
-				<td @if($introduce->information) data-toggle="popover" data-content="{{$introduce->information}}" data-trigger="hover" data-placement="top" @endif class="@if($introduce->status == 1) text-warning @elseif($introduce->status == 2) text-success @else text-danger @endif" >
-					{{$introduce->status_name()}}
+				<td @if($introduce->information) data-toggle="popover" data-content="{{$introduce->information}}" data-trigger="hover" data-placement="top" @endif>
+					@if (!$introduce->confirmed)
+						<span class="text-warning"> در حال برسی </span>
+					@elseif ($introduce->status == 1)
+						<span class="text-warning"> معلق </span>
+					@elseif ($introduce->status == 2)
+						<span class="text-success"> تاییدشده </span>
+					@elseif ($introduce->status == 3)
+						<span class="text-danger"> ردشده </span>
+					@else
+						-
+					@endif
 				</td>
 				<td> {{date_picker_date($introduce->created_at)}} </td>
 				@operator
@@ -53,9 +63,8 @@
 							<div class="row">
 								<div class="col-md-8">
 									<select class="form-control" name="status" id="status">
-										<option value="1" @if($introduce->status == 1) selected @endif > معلق </option>
-										<option value="2" @if($introduce->status == 2) selected @endif > تایید کردن </option>
-										<option value="3" @if($introduce->status == 3) selected @endif > رد کردن </option>
+										<option value="2"> تایید کردن </option>
+										<option value="3"> رد کردن </option>
 									</select>
 								</div>
 								<div class="col-md-4">

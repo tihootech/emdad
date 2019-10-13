@@ -19,6 +19,7 @@ class CreateIntroducesTable extends Migration
             $table->unsignedInteger('organ_id');
             $table->unsignedInteger('operator_id');
             $table->unsignedSmallInteger('status')->default(1); // 1:pending, 2:accepted, 3:rejected
+            $table->boolean('confirmed')->default(1);
             $table->text('information')->nullable();
             $table->timestamps();
         });

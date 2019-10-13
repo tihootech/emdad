@@ -16,4 +16,15 @@ class Notification extends Model
     	}
 		self::insert($records);
     }
+
+    public function history()
+    {
+        return $this->belongsTo(NotificationHistory::class, 'notification_history_id');
+    }
+
+    public function mark_as_read()
+    {
+        $this->read = 1;
+        $this->save();
+    }
 }

@@ -15,7 +15,14 @@
         <!--Notification Menu-->
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-bell-o fa-lg"></i></a>
             <ul class="app-notification dropdown-menu text-right">
-                <li class="app-notification__title"> شما ناتیفیکیشن جدیدی ندارید. </li>
+                @if (auth()->user()->fresh_notifications->count())
+                    @foreach (auth()->user()->fresh_notifications as $notification)
+                        <li class="app-notification__item"> <a href="{{url("notifications")}}"> {{$notification->history->body ?? '-'}} </a> </li>
+                    @endforeach
+                @else
+                    <li class="app-notification__title"> شما پیغام جدیدی ندارید. </li>
+                @endif
+                <li class="app-notification__footer"> <a href="{{url("notifications")}}"> مشاهده همه پیغام ها </a> </li>
             </ul>
         </li>
         <!-- User Menu-->

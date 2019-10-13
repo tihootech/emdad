@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Introduce;
 
 class HomeController extends Controller
 {
@@ -24,6 +25,11 @@ class HomeController extends Controller
     public function index()
     {
         $user = auth()->user();
-        return view('home', compact('user'));
+        if (operator()) {
+            $rejects = Introduce::whereConfirmed(0)->paginate(50);
+            return view('home', compact('rejects'));
+        }else {
+            return view('home', compact('user'));
+        }
     }
 }

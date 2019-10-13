@@ -13,12 +13,19 @@ class NotificationController extends Controller
 	public function __construct()
 	{
 		$this->middleware('auth');
-		$this->middleware('master');
+		$this->middleware('master')->except(['index']);
 	}
 
 	public function index()
 	{
-		$list = NotificationHistory::latest()->paginate(10);
+		if (master()) {
+			$list = NotificationHistory::latest()->paginate(10);
+		}else {
+			$list = Notification::where('user_id', auth()->id())->latest()->orderBy('read')->paginate(10);
+			foreach ($list as $notification) {
+				$notification->mark_as_read();
+			}
+		}
 		return view('notifications.index', compact('list'));
 	}
 
