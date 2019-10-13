@@ -89,10 +89,23 @@ $(document).on('click','[data-check]',function () {
 });
 
 $(document).on('change', '#status', function () {
-	value = $(this).val();
+	var value = $(this).val();
 	if (value == 3) {
-		$(this).parents('form').find('#information').slideDown().prop('required',true);;
+		$(this).parents('form').find('#information').slideDown().prop('required',true);
 	}else {
-		$(this).parents('form').find('#information').slideUp().prop('required',false);;
+		$(this).parents('form').find('#information').slideUp().prop('required',false);
+	}
+});
+
+$(document).on('change', '#education-grade', function () {
+	var value = $(this).val();
+	var target = $('#education-field');
+	var div = target.parents('.form-group')
+	if (value == 'سیکل') {
+		div.hide();
+		target.prop('required',false);
+	}else {
+		div.show();
+		target.prop('required',true);
 	}
 });

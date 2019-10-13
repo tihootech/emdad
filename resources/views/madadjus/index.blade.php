@@ -26,7 +26,6 @@
 						<th scope="col">#</th>
 						<th scope="col"> <i class="fa fa-square-o" data-checked="0" data-check="all"></i> </th>
 						<th scope="col"> نام و نام خانوادگی </th>
-						<th scope="col"> کدملی </th>
 						<th scope="col"> کد مددجویی </th>
 						<th scope="col"> تاریخ تولد </th>
 						<th scope="col"> سن </th>
@@ -47,7 +46,6 @@
 							<td class="@if($madadju->introduces->count()) bg-red-light @endif" data-toggle="popover" data-content="@if($madadju->introduces->count()) معرفی شده @else معرفی نشده @endif" data-trigger="hover" data-placement="top">
 								{{$madadju->full_name() }}
 							</td>
-							<td>{{$madadju->national_code ?? '-'}}</td>
 							<td>{{$madadju->muid ?? '-'}}</td>
 							<td>{{$madadju->birthday ? date_picker_date($madadju->birthday) : '-'}}</td>
 							<td>{{$madadju->age()}}</td>
