@@ -186,7 +186,7 @@
 		<div class="tile">
 			<h4 class="mb-4 text-info"> <i class="fa fa-tasks ml-1"></i> عملیات </h4>
 			<hr>
-			<a href="{{url("madadju/$madadju->id")}}" class="btn btn-outline-success mx-2"> <i class="fa fa-edit ml-1"></i> ویرایش </a>
+			<a href="{{url("madadju/$madadju->id/edit")}}" class="btn btn-outline-success mx-2"> <i class="fa fa-edit ml-1"></i> ویرایش </a>
 			@include('partials.delete', ['key' => 'madadju', 'dtype'=>'text'])
 		</div>
 	@endoperator

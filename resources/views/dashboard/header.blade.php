@@ -13,11 +13,19 @@
             <button class="app-search__button"><i class="fa fa-search"></i></button>
         </li> --}}
         <!--Notification Menu-->
-        <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-bell-o fa-lg"></i></a>
+        <li class="dropdown">
+            <a class="app-nav__item p-relative" href="#" data-toggle="dropdown" aria-label="Show notifications">
+                <i class="fa fa-bell-o fa-lg"></i>
+                @if ($ncount = auth()->user()->fresh_notifications->count())
+                    <span class="app-notification__number">{{$ncount}}</span>
+                @endif
+            </a>
             <ul class="app-notification dropdown-menu text-right">
                 @if (auth()->user()->fresh_notifications->count())
                     @foreach (auth()->user()->fresh_notifications as $notification)
-                        <li class="app-notification__item"> <a href="{{url("notifications")}}"> {{$notification->history->body ?? '-'}} </a> </li>
+                        <li class="app-notification__item">
+                            <a href="{{url("notifications")}}"> {{$notification->history ? short($notification->history->body) : '-'}} </a>
+                        </li>
                     @endforeach
                 @else
                     <li class="app-notification__title"> شما پیغام جدیدی ندارید. </li>

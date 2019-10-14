@@ -13775,6 +13775,19 @@ be a descendant of the grid when it is being dragged.
   transition: background-color 0.3s ease;
 }
 
+.app-notification__number {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    color: #2A5297;
+    border-radius: 100%;
+    padding: 0 8px;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+}
+
 .app-notification__item:focus, .app-notification__item:hover {
   color: inherit;
   text-decoration: none;
