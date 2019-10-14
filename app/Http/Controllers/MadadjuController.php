@@ -23,6 +23,8 @@ class MadadjuController extends Controller
     public function index(Request $request)
     {
         $query = Madadju::query();
+        $query = $query->leftJoin('introduces', 'madadjus.id', '=', 'introduces.madadju_id')
+            ->select('madadjus.*', \DB::raw("COUNT(introduces.madadju_id) AS icount"))->groupBy('madadjus.id');
 
         // national code
         if ($phrase = $request->national_code) {
@@ -61,13 +63,28 @@ class MadadjuController extends Controller
         }
 
         // education grade
-        if ($phrase = $request->education_grade) {
-            $query = $query->where('education_grade', $phrase);
+        if ($array = $request->education_grade) {
+            $query = $query->whereIn('education_grade', $array);
         }
 
         // education filed
         if ($phrase = $request->education_filed) {
             $query = $query->where('education_filed', $phrase);
+        }
+
+        // region
+        if ($phrase = $request->region) {
+            $query = $query->where('region', $phrase);
+        }
+
+        // skill
+        if ($phrase = $request->skill) {
+            $query = $query->where('skill', 'like', "%$phrase%");
+        }
+
+        // training
+        if ($phrase = $request->training) {
+            $query = $query->where('training', 'like', "%$phrase%");
         }
 
         // married or single
@@ -79,9 +96,6 @@ class MadadjuController extends Controller
         if ($phrase = $request->military_status) {
             $query = $query->where('military_status', $phrase);
         }
-
-        $query = $query->leftJoin('introduces', 'madadjus.id', '=', 'introduces.madadju_id')
-            ->select('madadjus.*', \DB::raw("COUNT(introduces.madadju_id) AS icount"))->groupBy('madadjus.id');
 
         $madadjus = $query->orderBy('icount')->paginate(25);
         $organs = User::where('type', 'organ')->get();

@@ -43,21 +43,24 @@
 				<option @if( request('male') === '0' ) selected @endif value="0"> زن </option>
 			</select>
 		</div>
-		<div class="col-md-2 form-group">
+		<div class="col-md-4 form-group">
 			<label for="education-grade"> مقطع تحصیلی </label>
-			<select class="form-control" name="education_grade" id="education-grade">
-				<option value=""> -- همه موارد -- </option>
-				<option @if(request('education_grade') == 'سیکل') selected @endif > سیکل </option>
-				<option @if(request('education_grade') == 'دیپلم') selected @endif > دیپلم </option>
-				<option @if(request('education_grade') == 'فوق دیپلم') selected @endif > فوق دیپلم </option>
-				<option @if(request('education_grade') == 'لیسانس') selected @endif > لیسانس </option>
-				<option @if(request('education_grade') == 'فوق لیسانس') selected @endif > فوق لیسانس </option>
-				<option @if(request('education_grade') == 'دکتری') selected @endif > دکتری </option>
+			<select class="select2" name="education_grade[]" id="education-grade" multiple>
+				<option @if(is_array(request('education_grade')) && in_array('سیکل', request('education_grade'))) selected @endif > سیکل </option>
+				<option @if(is_array(request('education_grade')) && in_array('دیپلم', request('education_grade'))) selected @endif > دیپلم </option>
+				<option @if(is_array(request('education_grade')) && in_array('فوق دیپلم', request('education_grade'))) selected @endif > فوق دیپلم </option>
+				<option @if(is_array(request('education_grade')) && in_array('لیسانس', request('education_grade'))) selected @endif > لیسانس </option>
+				<option @if(is_array(request('education_grade')) && in_array('فوق لیسانس', request('education_grade'))) selected @endif > فوق لیسانس </option>
+				<option @if(is_array(request('education_grade')) && in_array('دکتری', request('education_grade'))) selected @endif > دکتری </option>
 			</select>
 		</div>
 		<div class="col-md-3 form-group">
-			<label for="education-field"> رشته تحصیلی </label>
-			<input type="text" class="form-control" id="education-field" name="education_field" value="{{request('education_field')}}">
+			<label for="education-field-search"> رشته تحصیلی </label>
+			<input type="text" class="form-control" id="education-field-search" name="education_field" value="{{request('education_field')}}">
+		</div>
+		<div class="col-md-2 form-group">
+			<label for="region"> منطقه </label>
+			<input type="number" class="form-control" id="region" name="region" value="{{request('region')}}">
 		</div>
 		<div class="col-md-2 form-group">
 			<label for="married"> وضعیت تاهل </label>
@@ -68,12 +71,20 @@
 			</select>
 		</div>
 		<div class="col-md-3 form-group">
-			<label for="military-status"> <small><i class="fa fa-asterisk ml-1 text-danger"></i></small> وضعیت نظام وظیفه </label>
+			<label for="military-status"> وضعیت نظام وظیفه </label>
 			<select class="form-control" name="military_status" id="military-status">
 				<option value=""> -- همه موارد -- </option>
 				<option @if( request('military_status') == 'مشمول خدمت' ) selected @endif > مشمول خدمت </option>
 				<option @if( request('military_status') == 'معاف یا پایان خدمت' ) selected @endif > معاف یا پایان خدمت </option>
 			</select>
+		</div>
+		<div class="col-md-5 form-group">
+			<label for="skill"> مهارت </label>
+			<input type="text" class="form-control" id="skill" name="skill" value="{{request('skill')}}">
+		</div>
+		<div class="col-md-5 form-group">
+			<label for="training"> آموزش </label>
+			<input type="text" class="form-control" id="training" name="training" value="{{request('training')}}">
 		</div>
 	</div>
 

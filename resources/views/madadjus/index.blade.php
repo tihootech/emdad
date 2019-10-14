@@ -26,14 +26,11 @@
 						<th scope="col">#</th>
 						<th scope="col"> <i class="fa fa-square-o" data-checked="0" data-check="all"></i> </th>
 						<th scope="col"> نام و نام خانوادگی </th>
-						<th scope="col"> کد مددجویی </th>
-						<th scope="col"> تاریخ تولد </th>
 						<th scope="col"> سن </th>
-						<th scope="col"> جنسیت </th>
-						<th scope="col"> مقطع تحصیلی </th>
-						<th scope="col"> موبایل </th>
-						<th scope="col"> وضعیت تاهل </th>
+						<th scope="col"> مهارت و آموزش </th>
 						<th scope="col"> وضعیت نظام وظیفه </th>
+						<th scope="col"> منطقه </th>
+						<th scope="col"> جنسیت </th>
 						<th scope="col"> تعداد معرفی </th>
 						<th scope="col" colspan="3"> عملیات </th>
 					</tr>
@@ -43,31 +40,31 @@
 						<tr>
 							<th scope="row">{{$index+1}}</th>
 							<td> <i class="fa fa-square-o" data-checked="0" data-check="{{$madadju->id}}"></i> </td>
-							<td class="@if($madadju->introduces->count()) bg-red-light @endif" data-toggle="popover" data-content="@if($madadju->introduces->count()) معرفی شده @else معرفی نشده @endif" data-trigger="hover" data-placement="top">
+							<td class="@if($madadju->introduces->count()) bg-red-light @endif">
 								{{$madadju->full_name() }}
 							</td>
-							<td>{{$madadju->muid ?? '-'}}</td>
-							<td>{{$madadju->birthday ? date_picker_date($madadju->birthday) : '-'}}</td>
 							<td>{{$madadju->age()}}</td>
-							<td>{{$madadju->male ? 'مرد' : 'زن'}}</td>
-							<td>{{$madadju->education_grade ?? '-'}}</td>
-							<td>{{$madadju->mobile ?? '-'}}</td>
-							<td>{{$madadju->married ? 'متاهل' : 'مجرد'}}</td>
+							<td>
+								<span class="badge {{$madadju->skill ? 'badge-info': 'badge-secondary'}}" data-toggle="popover" data-content="{{$madadju->skill ?? 'تعریف نشده'}}" data-trigger="hover" data-placement="top"> مهارت </span>
+								<span class="badge {{$madadju->training ? 'badge-info': 'badge-secondary'}} mr-1" data-toggle="popover" data-content="{{$madadju->training ?? 'تعریف نشده'}}" data-trigger="hover" data-placement="top"> آموزش </span>
+							</td>
 							<td>{{$madadju->military_status ?? '-'}}</td>
+							<td>{{$madadju->region ?? '-'}}</td>
+							<td>{{$madadju->male ? 'مرد' : 'زن'}}</td>
 							<td @unless($madadju->icount) class="text-success" @endunless>
 								{{$madadju->icount ? $madadju->icount : 'صفر'}}
 							</td>
-							<td>
+							<td align="center">
 								<a href="{{url("madadju/$madadju->id")}}" class="btn btn-sm btn-outline-primary" data-toggle="popover" data-content="جزییات" data-trigger="hover" data-placement="top">
 									<i class="fa fa-list ml-1"></i>
 								</a>
 							</td>
-							<td>
+							<td align="center">
 								<a href="{{url("madadju/$madadju->id/edit")}}" class="btn btn-sm btn-outline-success" data-toggle="popover" data-content="ویرایش" data-trigger="hover" data-placement="top">
 									<i class="fa fa-edit ml-1"></i>
 								</a>
 							</td>
-							<td class="text-center">
+							<td align="center" class="text-center">
 								@include('partials.delete', ['key' => 'madadju', 'dtype'=>'hover', 'btn_sm'=>true])
 							</td>
 						</tr>
