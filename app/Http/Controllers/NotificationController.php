@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\NotificationHistory;
 use App\Notification;
 use App\User;
+use App\Organ;
 
 class NotificationController extends Controller
 {
@@ -32,7 +33,7 @@ class NotificationController extends Controller
     public function create()
     {
 		$operators = User::whereType('operator')->get();
-		$organs = User::whereType('organ')->get();
+		$organs = Organ::all();
 		return view('notifications.create', compact('operators', 'organs'));
     }
 

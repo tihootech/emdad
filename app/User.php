@@ -11,12 +11,32 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'name', 'username', 'password', 'type'
+        'username', 'password', 'owner_type', 'owner_id'
     ];
 
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function is_organ()
+    {
+        return $this->owner_type == Organ::class;
+    }
+
+    public function is_operator()
+    {
+        return $this->owner_type == Operator::class;
+    }
+
+    public function is_master()
+    {
+        return $this->owner_type == Master::class;
+    }
+
+    public function owner()
+    {
+        return $this->belongsTo($this->owner_type);
+    }
 
     public function fresh_introduces()
     {

@@ -1,0 +1,26 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Owner extends Model
+{
+	protected $guarded = ['id'];
+
+	public function user()
+	{
+		return $this->morphOne(User::class, 'owner');
+	}
+
+    public function full_name()
+    {
+        return $this->first_name .' '. $this->last_name;
+    }
+
+	public function type()
+	{
+		$user = $this->user;
+		return $user ? strtolower(str_replace('App\\', '', $user->owner_type)) : null;
+	}
+}

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Introduce;
 use App\User;
+use App\Organ;
+use App\Operator;
 use App\Madadju;
 
 class IntroduceController extends Controller
@@ -21,7 +23,7 @@ class IntroduceController extends Controller
 	{
 
 		if ( only_organ() ) {
-			$introduces = Introduce::where('organ_id', auth()->id())->latest()->paginate(25);
+			$introduces = Introduce::where('organ_id', current_organ_id())->latest()->paginate(25);
 		}elseif ( operator() ) {
 
 			$query = Introduce::query();
@@ -54,8 +56,8 @@ class IntroduceController extends Controller
 		}
 
 		$madadjus = Madadju::all();
-		$organs = User::whereType('organ')->get();
-		$operators = User::whereType('operator')->get();
+		$organs = Organ::all();
+		$operators = Operator::all();
 
 		return view('introduces.index', compact('introduces','madadjus', 'organs', 'operators'));
 	}
@@ -64,16 +66,16 @@ class IntroduceController extends Controller
     {
         $request->validate([
             'checked_ids'=>'required',
-            'organ_id'=>'required|exists:users,id',
+            'organ_id'=>'required|exists:organs,id',
         ]);
         foreach ($request->checked_ids as $madadju_id) {
             $data['madadju_id'] = $madadju_id;
             $data['organ_id'] = $request->organ_id;
-            $data['operator_id'] = auth()->id();
+            $data['operator_id'] = current_operator_id();
             Introduce::create($data);
         }
-        $organ = User::find($request->organ_id);
-        return back()->withMessage('افراد مورد نظر شما به موسسه '.$organ->name.' معرفی شدند.');
+        $organ = Organ::find($request->organ_id);
+        return back()->withMessage('افراد مورد نظر شما به موسسه "'.$organ->title().'" معرفی شدند.');
     }
 
 	public function change_status(Introduce $introduce, Request $request)

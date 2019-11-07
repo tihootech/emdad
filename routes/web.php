@@ -30,3 +30,7 @@ Route::get('notifications/create', 'NotificationController@create');
 Route::post('notifications/{target}', 'NotificationController@store');
 Route::put('notifications/{id}', 'NotificationController@update');
 Route::delete('notifications/{id}', 'NotificationController@destroy');
+
+// owner
+Route::get('owner/{user}/edit', 'OwnerController@edit');
+Route::put('owner/{owner_id}', 'OwnerController@update');

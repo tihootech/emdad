@@ -28,16 +28,16 @@ class AppServiceProvider extends ServiceProvider
         \Schema::defaultStringLength(191);
 
         Blade::if('operator', function () {
-            $user = auth()->user();
-            return $user && ($user->type == 'operator' || $user->type == 'master');
+            return operator();
         });
         Blade::if('master', function () {
-            $user = auth()->user();
-            return $user && $user->type == 'master';
+            return master();
         });
         Blade::if('only_organ', function () {
-            $user = auth()->user();
-            return $user && $user->type == 'organ';
+            return only_organ();
+        });
+        Blade::if('organ', function () {
+            return organ();
         });
     }
 }

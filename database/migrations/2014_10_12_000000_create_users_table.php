@@ -15,19 +15,18 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->morphs('owner');
             $table->string('username')->unique();
             $table->string('password');
-            $table->string('type'); // master, operator, organ
             $table->rememberToken();
             $table->timestamps();
         });
 
         App\User::create([
-            'name' => 'متصدی اصلی',
             'username' => 'master',
             'password' => bcrypt('master'),
-            'type' => 'master',
+            'owner_id' => 1,
+            'owner_type' => 'App\Master',
         ]);
     }
 

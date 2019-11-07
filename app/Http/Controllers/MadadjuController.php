@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Madadju;
 use App\User;
+use App\Organ;
+use App\Operator;
 use App\Introduce;
 use App\Rules\NationalCode;
 use App\Rules\PersianDate;
@@ -98,7 +100,7 @@ class MadadjuController extends Controller
         }
 
         $madadjus = $query->orderBy('icount')->paginate(25);
-        $organs = User::where('type', 'organ')->get();
+        $organs = Organ::all();
         return view('madadjus.index', compact('madadjus', 'organs'));
     }
 

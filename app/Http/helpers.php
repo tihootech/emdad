@@ -21,28 +21,40 @@ function select_old($key, $value, $object)
 function master()
 {
     $user = auth()->user();
-    return $user && $user->type == 'master';
+    return $user && $user->owner_type == \App\Master::class;
 }
 
 function operator()
 {
     $user = auth()->user();
-    return $user && ($user->type =='operator' || $user->type == 'master');
+    return $user && ($user->owner_type == \App\Master::class || $user->owner_type == \App\Operator::class);
 }
 
 function organ()
 {
     $user = auth()->user();
-    return $user && ($user->type == 'organ' || $user->type =='operator' || $user->type == 'master');
+    return $user && ($user->owner_type == \App\Master::class || $user->owner_type == \App\Operator::class || $user->owner_type == \App\Organ::class );
 }
 
 function only_organ()
 {
     $user = auth()->user();
-    return $user && $user->type == 'organ';
+    return $user && $user->owner_type == \App\Organ::class;
 }
 
 function short($string, $n=100)
 {
     return strlen($string) > $n ? mb_substr($string, 0, $n).'...' : $string;
+}
+
+function current_organ_id()
+{
+    $user = auth()->user();
+    return $user && $user->is_organ() ? $user->owner_id : null;
+}
+
+function current_operator_id()
+{
+    $user = auth()->user();
+    return $user && $user->is_operator() ? $user->owner_id : null;
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\User;
+use App\Organ;
+use App\Operator;
 
 class UserController extends Controller
 {
@@ -16,7 +18,8 @@ class UserController extends Controller
 
 	public function index($type)
 	{
-		$users = User::where('type', $type)->get();
+		$owner_type = 'App\\'.ucfirst($type);
+		$users = User::where('owner_type', $owner_type)->get();
 		$persian_type = $type == 'operator' ? 'متصدی' : 'موسسه';
 		return view('users.index', compact('users', 'type', 'persian_type'));
 	}
@@ -61,21 +64,28 @@ class UserController extends Controller
 	public function store(Request $request)
 	{
 		// validation
-		$data = $request->validate([
-			'type' => [
+		$user_data = $request->validate([
+			'owner_type' => [
 				'required',
-				Rule::in(['operator', 'organ'])
+				Rule::in([Operator::class, Organ::class])
 			],
-			'name' => 'required',
 			'username' => 'required|min:4|unique:users',
 			'password' => 'required|min:4',
 		]);
+		$owner_data = $request->validate([
+			'first_name' => 'required',
+			'last_name' => 'required',
+		]);
 
-		// incrypt password
-		$data['password'] = bcrypt($data['password']);
+		// create owner instance
+		$owner = $request->owner_type::create($owner_data);
+
+		// more data for user
+		$user_data['password'] = bcrypt($user_data['password']);
+		$user_data['owner_id'] = $owner->id;
 
 		// create user
-		User::create($data);
+		User::create($user_data);
 
 		// redirection
 		return back()->withMessage('کاربر جدید در سیستم اضافه شد.');
@@ -94,6 +104,7 @@ class UserController extends Controller
 	public function destroy(User $user)
 	{
 		$user->delete();
+		$user->owner->delete();
 		return back()->withMessage("کاربر $user->username با موفقیت از سیستم حذف شد.");
 	}
 }

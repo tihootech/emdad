@@ -15,27 +15,27 @@ class CreateMadadjusTable extends Migration
     {
         Schema::create('madadjus', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('muid');
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('national_code')->unique();
+            $table->string('muid')->nullable();
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('national_code')->unique()->nullable();
             $table->date('birthday')->nullable();
-            $table->boolean('male');
-            $table->string('education_grade');
+            $table->boolean('male')->nullable();
+            $table->string('education_grade')->nullable();
             $table->string('education_field')->nullable();
             $table->text('work_experience')->nullable();
             $table->string('skill')->nullable();
             $table->string('training')->nullable();
             $table->string('favourites')->nullable();
             $table->unsignedSmallInteger('region')->nullable();
-            $table->text('address');
+            $table->text('address')->nullable();
             $table->string('insurance_number')->nullable();
             $table->string('telephone')->nullable();
-            $table->string('mobile');
-            $table->boolean('married');
-            $table->string('military_status');
-            $table->string('warden_name');
-            $table->string('warden_national_code');
+            $table->string('mobile')->nullable();
+            $table->boolean('married')->nullable();
+            $table->string('military_status')->nullable();
+            $table->string('warden_name')->nullable();
+            $table->string('warden_national_code')->nullable();
             $table->timestamps();
         });
     }

@@ -90,7 +90,9 @@
 					<select class="select2" name="organ_id" id="organ" required>
 						<option value=""></option>
 						@foreach ($organs as $organ)
-							<option @if(old('organ_id') == $organ->id) selected @endif value="{{$organ->id}}">{{$organ->name}}</option>
+							<option @if(old('organ_id') == $organ->id) selected @endif value="{{$organ->id}}">
+								{{$organ->title()}}
+							</option>
 						@endforeach
 					</select>
 				</div>
