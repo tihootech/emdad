@@ -58,10 +58,12 @@
 			<label for="education-field-search"> رشته تحصیلی </label>
 			<input type="text" class="form-control" id="education-field-search" name="education_field" value="{{request('education_field')}}">
 		</div>
-		<div class="col-md-2 form-group">
-			<label for="region"> منطقه </label>
-			<input type="number" class="form-control" id="region" name="region" value="{{request('region')}}">
-		</div>
+		@master
+			<div class="col-md-2 form-group">
+				<label for="region"> منطقه </label>
+				<input type="number" class="form-control" id="region" name="region" value="{{request('region')}}">
+			</div>
+		@endmaster
 		<div class="col-md-2 form-group">
 			<label for="married"> وضعیت تاهل </label>
 			<select class="form-control" name="married" id="married">

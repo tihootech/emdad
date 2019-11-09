@@ -12,8 +12,8 @@ class UserController extends Controller
 {
 	public function __construct()
 	{
+		// all users can edit and update their own credentials
 		$this->middleware('auth');
-		$this->middleware('master')->except(['edit', 'update']);
 	}
 
     public function edit()
@@ -53,52 +53,4 @@ class UserController extends Controller
 		}
 	}
 
-	public function store(Request $request)
-	{
-		// validation
-		$user_data = $request->validate([
-			'owner_type' => [
-				'required',
-				Rule::in([Operator::class, Organ::class])
-			],
-			'username' => 'required|min:4|unique:users',
-			'password' => 'required|min:4',
-		]);
-		$owner_data = $request->validate([
-			'first_name' => 'required',
-			'last_name' => 'required',
-		]);
-
-		// create owner instance
-		$owner = $request->owner_type::create($owner_data);
-
-		// more data for user
-		$user_data['password'] = bcrypt($user_data['password']);
-		$user_data['owner_id'] = $owner->id;
-
-		// create user
-		User::create($user_data);
-
-		// redirection
-		return back()->withMessage('کاربر جدید در سیستم اضافه شد.');
-	}
-
-	public function update_password(User $user,Request $request)
-	{
-		$request->validate([
-			'username' => 'required|min:4',
-			'password' => 'required|min:4',
-		]);
-		$user->username = $request->username;
-		$user->password = bcrypt($request->password);
-		$user->save();
-		return back()->withMessage("رمزعبور $user->username تغییر پیدا کرد.");
-	}
-
-	public function destroy(User $user)
-	{
-		$user->delete();
-		$user->owner->delete();
-		return back()->withMessage("کاربر $user->username با موفقیت از سیستم حذف شد.");
-	}
 }

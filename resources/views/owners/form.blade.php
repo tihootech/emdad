@@ -73,6 +73,13 @@
 					</div>
 				@endif
 
+				@if ($type == 'operator')
+					<div class="col-md-2 form-group">
+						<label> منطقه فعالیت </label>
+						<input type="number" class="form-control" name="region" value="{{old('region') ?? $owner->region ?? null}}" required>
+					</div>
+				@endif
+
 				<hr class="w-100">
 				<div class="col-md-2">
 					<button type="submit" class="btn btn-primary btn-block"> ذخیره </button>

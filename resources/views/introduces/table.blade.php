@@ -5,8 +5,10 @@
 			<th scope="col"> مددجو </th>
 			@operator
 				<th scope="col"> موسسه معرفی شده </th>
-				<th scope="col"> متصدی معرفی کننده </th>
 			@endoperator
+			@master
+				<th scope="col"> متصدی معرفی کننده </th>
+			@endmaster
 			<th scope="col"> وضعیت </th>
 			<th scope="col"> تاریخ معرفی </th>
 			<th scope="col"> عملیات </th>
@@ -24,9 +26,11 @@
 					@endif
 				</td>
 				@operator
-					<td> {{$introduce->organ ? $introduce->organ->name : '-'}} </td>
-					<td> {{$introduce->operator ? $introduce->operator->name : '-'}} </td>
+					<td> {{$introduce->organ ? $introduce->organ->agency_name : '-'}} </td>
 				@endoperator
+				@master
+					<td> {{$introduce->operator ? $introduce->operator->full_name() : '-'}} </td>
+				@endmaster
 				<td @if($introduce->information) data-toggle="popover" data-content="{{$introduce->information}}" data-trigger="hover" data-placement="top" @endif>
 					@if (!$introduce->confirmed)
 						<span class="text-warning"> در حال برسی </span>

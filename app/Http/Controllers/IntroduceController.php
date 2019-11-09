@@ -69,10 +69,15 @@ class IntroduceController extends Controller
             'organ_id'=>'required|exists:organs,id',
         ]);
         foreach ($request->checked_ids as $madadju_id) {
-            $data['madadju_id'] = $madadju_id;
-            $data['organ_id'] = $request->organ_id;
-            $data['operator_id'] = current_operator_id();
-            Introduce::create($data);
+			$madadju = Madadju::find($madadju_id);
+			if ( only_operator() && $madadju->region != auth()->user()->region() ) {
+	            abort(404);
+	        }else {
+				$data['madadju_id'] = $madadju_id;
+	            $data['organ_id'] = $request->organ_id;
+	            $data['operator_id'] = current_operator_id();
+	            Introduce::create($data);
+	        }
         }
         $organ = Organ::find($request->organ_id);
         return back()->withMessage('افراد مورد نظر شما به موسسه "'.$organ->title().'" معرفی شدند.');

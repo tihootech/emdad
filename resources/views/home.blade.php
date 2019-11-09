@@ -41,10 +41,10 @@
     </div>
 
     @only_organ
-        @if ($user->fresh_introduces->count())
+        @if ($user->owner->fresh_introduces->count())
             <div class="tile mt-4">
                 <h4 class="mb-4"> لیست افراد معرفی شده جدید </h4>
-                @include('introduces.table', ['introduces'=>$user->fresh_introduces])
+                @include('introduces.table', ['introduces'=>$user->owner->fresh_introduces])
             </div>
         @endif
     @endonly_organ

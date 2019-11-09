@@ -43,8 +43,8 @@ class OwnerController extends Controller
 				Rule::in([Operator::class, Organ::class])
 			],
 			'type' => 'required',
-			'username' => 'required|unique:users,username',
-			'password' => 'required',
+			'username' => 'required|string|min:4|unique:users,username',
+			'password' => 'required|string|min:4',
 		]);
 
 		// create owner
@@ -81,7 +81,7 @@ class OwnerController extends Controller
 					'required',
 					Rule::in([Operator::class, Organ::class])
 				],
-				'username' => 'required|unique:users,username,'.$owner->user->id,
+				'username' => 'required|string|min:4|unique:users,username,'.$owner->user->id,
 			]);
 
 			// update owner itself
@@ -145,6 +145,7 @@ class OwnerController extends Controller
 		return request()->validate([
 			'first_name' => 'required',
 			'last_name' => 'required',
+			'region' => 'required|integer|gt:0',
 		]);
 	}
 }

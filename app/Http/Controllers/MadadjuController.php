@@ -74,11 +74,6 @@ class MadadjuController extends Controller
             $query = $query->where('education_filed', $phrase);
         }
 
-        // region
-        if ($phrase = $request->region) {
-            $query = $query->where('region', $phrase);
-        }
-
         // skill
         if ($phrase = $request->skill) {
             $query = $query->where('skill', 'like', "%$phrase%");
@@ -99,6 +94,16 @@ class MadadjuController extends Controller
             $query = $query->where('military_status', $phrase);
         }
 
+        // region
+        if (master()) {
+            if ($phrase = $request->region) {
+                $query = $query->where('region', $phrase);
+            }
+        }else {
+            $region = auth()->user()->region();
+            $query = $query->where('region', $region);
+        }
+
         $madadjus = $query->orderBy('icount')->paginate(25);
         $organs = Organ::all();
         return view('madadjus.index', compact('madadjus', 'organs'));
@@ -106,7 +111,11 @@ class MadadjuController extends Controller
 
     public function show(Madadju $madadju)
     {
-        if (only_organ() && !$madadju->introduced(auth()->id())) {
+        if (
+            (only_organ() && !$madadju->introduced(auth()->id())) // organ check
+            ||
+            (only_operator() && $madadju->region != auth()->user()->region()) // operator check
+        ) {
             abort(404);
         }
         return view('madadjus.show', compact('madadju'));
@@ -115,7 +124,7 @@ class MadadjuController extends Controller
     public function create()
     {
         $madadju = new Madadju;
-        return view('madadjus.create', compact('madadju'));
+        return view('madadjus.form', compact('madadju'));
     }
 
     public function store(Request $request)
@@ -127,11 +136,17 @@ class MadadjuController extends Controller
 
     public function edit(Madadju $madadju)
     {
-        return view('madadjus.create', compact('madadju'));
+        if ( only_operator() && $madadju->region != auth()->user()->region() ) {
+            abort(404);
+        }
+        return view('madadjus.form', compact('madadju'));
     }
 
     public function update(Request $request, Madadju $madadju)
     {
+        if ( only_operator() && $madadju->region != auth()->user()->region() ) {
+            abort(404);
+        }
         $data = self::validation($madadju->id);
         $madadju->update($data);
         return redirect('madadju')->withMessage('مددجو موردنظر ویرایش شد.');
@@ -178,6 +193,9 @@ class MadadjuController extends Controller
             ],
         ]);
 
+        if (only_operator()) {
+            $data['region'] = auth()->user()->region();
+        }
         $data['birthday'] = persian_to_carbon($data['birthday']);
 
         return $data;

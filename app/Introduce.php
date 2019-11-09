@@ -15,12 +15,12 @@ class Introduce extends Model
 
     public function organ()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Organ::class);
     }
 
     public function operator()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Operator::class);
     }
 
     public function status_name()

@@ -12,7 +12,7 @@
 							در تاریخ
 							<b class="text-info mx-1"> {{human_date($introduce->crated_at)}} </b>
 							به موسسه
-							<b class="text-info mx-1"> {{$introduce->organ->name ?? '-'}} </b>
+							<b class="text-info mx-1"> {{$introduce->organ->agency_name ?? '-'}} </b>
 							معرفی شد و این موسسه
 							@if ($introduce->status == 1)
 								<b class="text-secondary mx-1"> هنوز وضعیت شخص را مشخص نکرده است. </b>

@@ -90,6 +90,7 @@
 				<label for="education-grade"> <small><i class="fa fa-asterisk ml-1 text-danger"></i></small> مقطع تحصیلی </label>
 				<select class="form-control" name="education_grade" id="education-grade" required>
 					<option value=""> -- انتخاب کنید -- </option>
+					<option @if((old('education_grade') ?? $madadju->education_grade) == 'بی سواد') selected @endif > بی سواد </option>
 					<option @if((old('education_grade') ?? $madadju->education_grade) == 'سیکل') selected @endif > سیکل </option>
 					<option @if((old('education_grade') ?? $madadju->education_grade) == 'دیپلم') selected @endif > دیپلم </option>
 					<option @if((old('education_grade') ?? $madadju->education_grade) == 'فوق دیپلم') selected @endif > فوق دیپلم </option>
@@ -121,8 +122,14 @@
 			</div>
 
 			<div class="col-md-2 form-group">
-				<label for="region"> منطقه </label>
-				<input type="number" class="form-control" id="region" name="region" value="{{old('region') ?? $madadju->region}}">
+				<label for="region"> <small><i class="fa fa-asterisk ml-1 text-danger"></i></small> منطقه </label>
+				<input type="number" class="form-control" id="region" name="region" required
+					@master
+						value="{{old('region') ?? $madadju->region}}"
+					@else
+						value="{{auth()->user()->region()}}" readonly
+					@endmaster
+				>
 			</div>
 
 			<div class="col-md-4 form-group">

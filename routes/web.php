@@ -10,8 +10,8 @@ Route::get('acc', 'UserController@edit');
 Route::put('acc', 'UserController@update');
 
 // master user control
-Route::post('users', 'UserController@store');
-Route::put('acc/{user}', 'UserController@update_password');
+// Route::post('users', 'UserController@store');
+// Route::put('acc/{user}', 'UserController@update_password');
 // Route::delete('acc/{user}', 'UserController@destroy');
 
 // madadjus and introduces

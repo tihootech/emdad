@@ -42,6 +42,12 @@ function only_organ()
     return $user && $user->owner_type == \App\Organ::class;
 }
 
+function only_operator()
+{
+    $user = auth()->user();
+    return $user && $user->owner_type == \App\Operator::class;
+}
+
 function short($string, $n=100)
 {
     return strlen($string) > $n ? mb_substr($string, 0, $n).'...' : $string;

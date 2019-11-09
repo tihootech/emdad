@@ -38,11 +38,6 @@ class User extends Authenticatable
         return $this->belongsTo($this->owner_type);
     }
 
-    public function fresh_introduces()
-    {
-        return $this->hasMany(Introduce::class, 'organ_id')->where('status', 1);
-    }
-
     public function notifications()
     {
         return $this->hasMany(Notification::class);
@@ -51,6 +46,12 @@ class User extends Authenticatable
     public function fresh_notifications()
     {
         return $this->hasMany(Notification::class)->whereRead(0);
+    }
+
+    public function region()
+    {
+        $owner = $this->owner;
+        return $owner ? $owner->region : null;
     }
 
     public static function acc_for_owners($data, $id)

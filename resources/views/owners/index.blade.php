@@ -20,6 +20,8 @@
 							<th scope="col"> نام مسئول </th>
 							@if ($type == 'organ')
 								<th scope="col"> نام بنگاه </th>
+							@elseif ($type == 'operator')
+								<th scope="col"> منطقه فعالیت </th>
 							@endif
 							<th scope="col"> نام کاربری </th>
 							<th scope="col" colspan="3"> عملیات </th>
@@ -32,6 +34,8 @@
 								<td>{{$owner->full_name()}}</td>
 								@if ($type == 'organ')
 									<td> {{$owner->agency_name}} </td>
+								@elseif ($type == 'operator')
+									<td> {{$owner->region}} </td>
 								@endif
 								<td>{{$owner->user->username ?? '-'}}</td>
 								<td>
