@@ -1,6 +1,5 @@
 <?php
 
-
 // defaults
 Route::view('/', 'welcome');
 Auth::routes(['register' => false]);
@@ -11,10 +10,9 @@ Route::get('acc', 'UserController@edit');
 Route::put('acc', 'UserController@update');
 
 // master user control
-Route::get('users/{type}', 'UserController@index');
 Route::post('users', 'UserController@store');
 Route::put('acc/{user}', 'UserController@update_password');
-Route::delete('acc/{user}', 'UserController@destroy');
+// Route::delete('acc/{user}', 'UserController@destroy');
 
 // madadjus and introduces
 Route::resource('madadju', 'MadadjuController');
@@ -32,5 +30,9 @@ Route::put('notifications/{id}', 'NotificationController@update');
 Route::delete('notifications/{id}', 'NotificationController@destroy');
 
 // owner
-Route::get('owner/{user}/edit', 'OwnerController@edit');
-Route::put('owner/{owner_id}', 'OwnerController@update');
+Route::get('owners/{type}', 'OwnerController@index');
+Route::get('owners/create/{type}', 'OwnerController@create');
+Route::post('owners', 'OwnerController@store');
+Route::get('owners/{type}/{owner_id}/edit', 'OwnerController@edit');
+Route::put('owners/{owner_id}', 'OwnerController@update');
+Route::delete('owners/{type}/{owner_id}', 'OwnerController@destroy');

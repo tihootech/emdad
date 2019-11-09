@@ -12,11 +12,11 @@
                         <div class="card-body">
                             @operator
                                 @master
-                                    <a href="{{url('users/operator')}}" class="btn btn-outline-light mx-1">
+                                    <a href="{{url('owners/operator')}}" class="btn btn-outline-light mx-1">
                                         <i class="fa fa-user-secret ml-1"></i>
                                         مدیریت متصدیان
                                     </a>
-                                    <a href="{{url('users/organ')}}" class="btn btn-outline-light mx-1">
+                                    <a href="{{url('owners/organ')}}" class="btn btn-outline-light mx-1">
                                         <i class="fa fa-bank ml-1"></i>
                                         مدیریت موسسات
                                     </a>

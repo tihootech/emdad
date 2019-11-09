@@ -135,19 +135,22 @@
 				<input type="text" class="form-control" id="skill" name="skill" value="{{old('skill') ?? $madadju->skill}}">
 			</div>
 
-			<div class="col-md-6 form-group">
+			<div class="col-md-5 form-group">
 				<label for="training"> آموزش </label>
 				<input type="text" class="form-control" id="training" name="training" value="{{old('training') ?? $madadju->training}}">
 			</div>
 
-			<div class="col-md-6 form-group">
+			<div class="col-md-5 form-group">
 				<label for="favourites"> علاقه مندی ها </label>
 				<input type="text" class="form-control" id="favourites" name="favourites" value="{{old('favourites') ?? $madadju->favourites}}">
 			</div>
 
-			<div class="col-md-12 form-group">
-				<label for="work-experience"> سابقه کار </label>
-				<textarea name="work_experience" id="work-experience" name="work_experience" rows="4" class="form-control">{{old('work_experience') ?? $madadju->work_experience}}</textarea>
+			<div class="col-md-2 form-group">
+				<label for="work-experience"> تجربه </label>
+				<select class="form-control" name="work_experience" id="work-experience" required>
+					<option @if( select_old('work_experience', 0, $madadju) ) selected @endif value="0"> خیر </option>
+					<option @if( select_old('work_experience', 1, $madadju) ) selected @endif value="1"> بله </option>
+				</select>
 			</div>
 
 			<hr class="w-100">

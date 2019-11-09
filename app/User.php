@@ -52,4 +52,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(Notification::class)->whereRead(0);
     }
+
+    public static function acc_for_owners($data, $id)
+    {
+        $user = new self;
+        $user->owner_id = $id;
+        $user->owner_type = $data['owner_type'];
+        $user->username = $data['username'];
+        $user->password = bcrypt($data['password']);
+        $user->save();
+        return $user;
+    }
 }

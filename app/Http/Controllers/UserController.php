@@ -16,14 +16,6 @@ class UserController extends Controller
 		$this->middleware('master')->except(['edit', 'update']);
 	}
 
-	public function index($type)
-	{
-		$owner_type = 'App\\'.ucfirst($type);
-		$users = User::where('owner_type', $owner_type)->get();
-		$persian_type = $type == 'operator' ? 'متصدی' : 'موسسه';
-		return view('users.index', compact('users', 'type', 'persian_type'));
-	}
-
     public function edit()
     {
     	$user = auth()->user();
@@ -94,8 +86,10 @@ class UserController extends Controller
 	public function update_password(User $user,Request $request)
 	{
 		$request->validate([
-			'password' => 'required|min:4'
+			'username' => 'required|min:4',
+			'password' => 'required|min:4',
 		]);
+		$user->username = $request->username;
 		$user->password = bcrypt($request->password);
 		$user->save();
 		return back()->withMessage("رمزعبور $user->username تغییر پیدا کرد.");

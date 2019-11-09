@@ -58,3 +58,8 @@ function current_operator_id()
     $user = auth()->user();
     return $user && $user->is_operator() ? $user->owner_id : null;
 }
+
+function class_name($input, $prefix='App\\')
+{
+    return $prefix.str_replace('_', '', ucwords($input, '_'));;
+}

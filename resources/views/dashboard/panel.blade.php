@@ -1,6 +1,6 @@
 @master
 	@php
-		$hrefs = ['users/operator', 'users/organ'];
+		$hrefs = ['owners/operator', 'owners/organ'];
 	@endphp
 	<li class="treeview @if(expanded($hrefs)) is-expanded @endif">
 		<a class="app-menu__item" href="#" data-toggle="treeview">

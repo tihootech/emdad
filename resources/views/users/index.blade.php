@@ -12,58 +12,61 @@
 
 	<div class="tile">
 		@if ($users->count())
-			<table class="table table-bordered table-hover table-striped">
-				<thead>
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col"> نام </th>
-						<th scope="col"> نام کاربری </th>
-						<th scope="col" colspan="3"> عملیات </th>
-					</tr>
-				</thead>
-				<tbody>
-					@foreach ($users as $index => $user)
+			<div class="table-responsive">
+				<table class="table table-bordered table-hover table-striped">
+					<thead>
 						<tr>
-							<th scope="row">{{$index+1}}</th>
-							<td>{{$user->owner ? $user->owner->full_name() : '-'}}</td>
-							<td>{{$user->username}}</td>
-							<td>
-								<form class="form-inline" action="{{url("acc/$user->id")}}" method="post">
-									@method('PUT')
-									@csrf
-									<input type="text" class="form-control mx-1" name="password" required placeholder="رمزعبور جدید">
-									<button type="submit" class="btn btn-primary mx-1">
-										<i class="fa fa-unlock ml-1"></i>
-										تغییر رمزعبور
-									</button>
-								</form>
-							</td>
-							<td>
-								@if ($user->is_organ() && !($user->owner && $user->owner->agency_name) )
-									<a class="btn btn-outline-info" href="{{url("owner/$user->id/edit")}}">
-										<i class="fa fa-check ml-1"></i>
-										تکمیل اطلاعات
-									</a>
-								@else
-									<a class="btn btn-outline-success" href="{{url("owner/$user->id/edit")}}">
-										<i class="fa fa-edit ml-1"></i>
-										ویرایش
-									</a>
-								@endif
-							</td>
-							<td class="text-center">
-								<form action="{{url("acc/$user->id")}}" method="post" id="delete-user-{{$user->id}}">
-									@method('DELETE')
-									@csrf
-									<button type="button" class="btn btn-outline-danger delete" data-target="delete-user-{{$user->id}}">
-										<i class="fa fa-trash ml-1"></i> حذف دائمی
-									</button>
-								</form>
-							</td>
+							<th scope="col">#</th>
+							<th scope="col"> نام </th>
+							<th scope="col"> نام کاربری </th>
+							<th scope="col" colspan="3"> عملیات </th>
 						</tr>
-					@endforeach
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						@foreach ($users as $index => $user)
+							<tr>
+								<th scope="row">{{$index+1}}</th>
+								<td>{{$user->owner ? $user->owner->title() : '-'}}</td>
+								<td>{{$user->username}}</td>
+								<td>
+									<form action="{{url("acc/$user->id")}}" method="post">
+										@method('PUT')
+										@csrf
+										<input type="text" class="form-control my-1" name="username" required placeholder="نام کاربری جدید" value="{{$user->username}}">
+										<input type="text" class="form-control my-1" name="password" required placeholder="رمزعبور جدید">
+										<button type="submit" class="btn btn-primary btn-block my-1">
+											<i class="fa fa-unlock ml-1"></i>
+											تغییر اطلاعات کاربری
+										</button>
+									</form>
+								</td>
+								<td>
+									@if ($user->is_organ() && !($user->owner && $user->owner->agency_name) )
+										<a class="btn btn-outline-info" href="{{url("owner/$user->id/edit")}}">
+											<i class="fa fa-check ml-1"></i>
+											تکمیل اطلاعات
+										</a>
+									@else
+										<a class="btn btn-outline-success" href="{{url("owner/$user->id/edit")}}">
+											<i class="fa fa-edit ml-1"></i>
+											ویرایش
+										</a>
+									@endif
+								</td>
+								<td class="text-center">
+									<form action="{{url("acc/$user->id")}}" method="post" id="delete-user-{{$user->id}}">
+										@method('DELETE')
+										@csrf
+										<button type="button" class="btn btn-outline-danger delete" data-target="delete-user-{{$user->id}}">
+											<i class="fa fa-trash ml-1"></i> حذف دائمی
+										</button>
+									</form>
+								</td>
+							</tr>
+						@endforeach
+					</tbody>
+				</table>
+			</div>
 		@else
 			<div class="alert alert-warning">
 				موردی یافت نشد.
@@ -86,7 +89,7 @@
 				<div class="modal-body">
 					<form class="row" action="{{url('users')}}" method="post" id="new-user-form">
 						@csrf
-						<input type="hidden" name="owner_type" value="App\{{ucfirst($type)}}">
+						<input type="hidden" name="owner_type" value="{{class_name($type)}}">
 
 						<div class="col-md-3 form-group">
 							<label> نام مسئول </label>

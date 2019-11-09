@@ -23,4 +23,15 @@ class Owner extends Model
 		$user = $this->user;
 		return $user ? strtolower(str_replace('App\\', '', $user->owner_type)) : null;
 	}
+
+	public function full_type()
+	{
+		return $this->user->owner_type ?? null;
+	}
+
+	public function persian_type()
+	{
+		$type = $this->type();
+		return $type == 'operator' ? 'متصدی' : 'موسسه';
+	}
 }

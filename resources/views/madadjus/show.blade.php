@@ -175,7 +175,7 @@
 			<div class="col-md-12 my-2">
 				<div class="card">
 					<div class="card-body">
-						<b> سابقه کار : </b> <span class="text-info"> {{$madadju->work_experience ?? '-'}}  </span>
+						<b> تجربه : </b> <span class="text-info"> {{$madadju->work_experience ?? '-'}}  </span>
 					</div>
 				</div>
 			</div>

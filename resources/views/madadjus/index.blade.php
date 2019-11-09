@@ -27,7 +27,8 @@
 						<th scope="col"> <i class="fa fa-square-o" data-checked="0" data-check="all"></i> </th>
 						<th scope="col"> نام و نام خانوادگی </th>
 						<th scope="col"> سن </th>
-						<th scope="col"> مهارت و آموزش </th>
+						<th scope="col"> مهارت </th>
+						<th scope="col"> آموزش </th>
 						<th scope="col"> وضعیت نظام وظیفه </th>
 						<th scope="col"> منطقه </th>
 						<th scope="col"> جنسیت </th>
@@ -45,8 +46,10 @@
 							</td>
 							<td>{{$madadju->age()}}</td>
 							<td>
-								<span class="badge {{$madadju->skill ? 'badge-info': 'badge-secondary'}}" data-toggle="popover" data-content="{{$madadju->skill ?? 'تعریف نشده'}}" data-trigger="hover" data-placement="top"> مهارت </span>
-								<span class="badge {{$madadju->training ? 'badge-info': 'badge-secondary'}} mr-1" data-toggle="popover" data-content="{{$madadju->training ?? 'تعریف نشده'}}" data-trigger="hover" data-placement="top"> آموزش </span>
+								 {{$madadju->skill ?? '-'}}
+							</td>
+							<td>
+								 {{$madadju->training ?? '-'}}
 							</td>
 							<td>{{$madadju->military_status ?? '-'}}</td>
 							<td>{{$madadju->region ?? '-'}}</td>
