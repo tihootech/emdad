@@ -65,5 +65,11 @@
 			<span class="app-menu__label"> اطلاع رسانی </span>
 		</a>
 	</li>
+	<li>
+		<a class="app-menu__item @if( request()->route()->getName() == 'tools' ) active @endif" href="{{url("tools")}}">
+			<i class="app-menu__icon fa fa-wrench"></i>
+			<span class="app-menu__label"> ابزار ها </span>
+		</a>
+	</li>
 
 @endmaster

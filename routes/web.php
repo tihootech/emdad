@@ -36,3 +36,6 @@ Route::post('owners', 'OwnerController@store');
 Route::get('owners/{type}/{owner_id}/edit', 'OwnerController@edit');
 Route::put('owners/{owner_id}', 'OwnerController@update');
 Route::delete('owners/{type}/{owner_id}', 'OwnerController@destroy');
+
+// tools
+Route::get('tools/{tool?}', 'ToolsController@tools')->name('tools');
