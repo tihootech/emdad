@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\NotificationHistory;
 use App\Notification;
 use App\User;
 use App\Organ;
+use App\Operator;
 
 class NotificationController extends Controller
 {
@@ -32,17 +34,23 @@ class NotificationController extends Controller
 
     public function create()
     {
-		$operators = User::whereType('operator')->get();
+		$operators = Operator::all();
 		$organs = Organ::all();
 		return view('notifications.create', compact('operators', 'organs'));
     }
 
-	public function store($target, Request $request)
+	public function store(Request $request)
 	{
-		$request->validate(['body'=>'required']);
-		$list = User::whereType($target)->get();
+		$request->validate([
+			'body'=>'required',
+			'target' => [
+				'required',
+				Rule::in([Operator::class, Organ::class])
+			],
+		]);
+		$list = User::whereOwnerType($request->target)->get();
 		if($count = $list->count()){
-			$history = NotificationHistory::make($target, $request->body);
+			$history = NotificationHistory::make($request->target, $request->body);
 			Notification::notify($history->id, $list);
 			return redirect('notifications')->withMessage("اطلاع رسانی به $count کاربر با موفقیت انجام شد");
 		}else {
@@ -58,7 +66,7 @@ class NotificationController extends Controller
 			$history->save();
 			return back()->withMessage('اطلاعیه مورد نظر شما به روز رسانی شد.');
 		}else {
-			return back()->withError('Nothing Found');
+			return back()->withError('Database Error');
 		}
 	}
 
@@ -70,7 +78,7 @@ class NotificationController extends Controller
 			$history->delete();
 			return back()->withMessage('اطلاع رسانی با موفقیت لغو شد و پیغام مورد نظر از داشبورد کاربران حذف شد.');
 		}else {
-			return back()->withError('Nothing Found');
+			return back()->withError('Database Error');
 		}
 	}
 }

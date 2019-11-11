@@ -9,8 +9,9 @@
 		<h4> اطلاع رسانی به متصدیان </h4>
 		<hr>
 		@if ($operators->count())
-			<form action="{{url("notifications/operator")}}" method="post">
+			<form action="{{url("notifications")}}" method="post">
 				@csrf
+				<input type="hidden" name="target" value="App\Operator">
 				<div class="my-2">
 					<label for="body"> متن پیغام </label>
 					<textarea name="body" id="body" rows="4" class="form-control" required>{{old('body')}}</textarea>

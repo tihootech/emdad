@@ -8,7 +8,7 @@
 				<div class="card my-3">
 					@master
 						<div class="card-header">
-							خطاب به : <span class="text-info"> {{$notification->target == 'organ' ? 'موسسات' : 'متصدیان'}} </span>
+							خطاب به : <span class="text-info"> {{persian($notification->target, true)}} </span>
 						</div>
 					@endmaster
 					<div class="card-body">

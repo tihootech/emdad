@@ -69,3 +69,16 @@ function class_name($input, $prefix='App\\')
 {
     return $prefix.str_replace('_', '', ucwords($input, '_'));;
 }
+
+function persian($class, $plural=false)
+{
+    if ($class == \App\Operator::class) {
+        return $plural ? "متصدیان" : "متصدی";
+    }
+    if ($class == \App\Organ::class) {
+        return $plural ? "موسسات" : "موسسه";
+    }
+    if ($class == \App\Madadju::class) {
+        return $plural ? "مددجویان" : "مددجو";
+    }
+}
