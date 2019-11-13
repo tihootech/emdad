@@ -12,7 +12,6 @@ function expanded($array)
     return in_array($path.$query,$array);
 }
 
-
 function select_old($key, $value, $object)
 {
     return old($key) === null ? $object->$key === $value : old($key) == $value;
@@ -83,15 +82,6 @@ function persian($class, $plural=false)
     }
 }
 
-
-function mycompact()
-{
-    $args = func_get_args();
-    $result = [];
-    foreach ($args as $variable) {
-        if (isset($$variable)) {
-            $result[$variable] = $$variable;
-        }
-    }
-    return $result;
+function rs($length = 10) {
+    return substr(str_shuffle(str_repeat($x='123456789ABCDEFGHJKLMNPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
 }

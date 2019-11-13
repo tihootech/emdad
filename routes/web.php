@@ -23,11 +23,14 @@ Route::post('introduce/confirm/{introduce}', 'IntroduceController@confirm');
 Route::post('introduce/status/{introduce}', 'IntroduceController@change_status');
 
 // notifications
+Route::get('notifications/history', 'NotificationController@history');
+Route::get('notifications/history/manage/{id}', 'NotificationController@manage');
 Route::get('notifications', 'NotificationController@index');
 Route::get('notifications/create', 'NotificationController@create');
 Route::post('notifications', 'NotificationController@store');
 Route::put('notifications/{id}', 'NotificationController@update');
 Route::delete('notifications/{id}', 'NotificationController@destroy');
+Route::delete('notifications/single/{notification}', 'NotificationController@single_delete');
 
 // owner
 Route::get('owners/{type}', 'OwnerController@index');

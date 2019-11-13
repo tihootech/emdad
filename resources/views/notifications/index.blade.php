@@ -6,44 +6,18 @@
 		@if ($list->count())
 			@foreach ($list as $notification)
 				<div class="card my-3">
-					@master
-						<div class="card-header">
-							خطاب به : <span class="text-info"> {{persian($notification->target, true)}} </span>
-						</div>
-					@endmaster
 					<div class="card-body">
 						<blockquote class="blockquote mb-0">
-							<p> {{$notification->history->body ?? $notification->body}} </p>
+							<small> {{$notification->history->body ?? 'Database Error'}} </small>
+							<hr>
 							<footer class="blockquote-footer"> {{human_date($notification->created_at)}} </footer>
 						</blockquote>
 					</div>
-					@master
-						<div class="card-footer text-left">
-							<a href="#edit-body" data-toggle="collapse" class="btn btn-outline-success ml-2">
-								<i class="fa fa-edit ml-1"></i> ویرایش متن
-							</a>
-							<form class="d-inline" action="{{url("notifications/{$notification->id}")}}" method="post" id="delete-notification-{{$notification->id}}">
-								@method('DELETE')
-								@csrf
-								<button type="button" class="btn btn-outline-danger delete" data-toggle="popover" data-content="با لغو اطلاع رسانی، پیغام فرستاده شده از داشبرد کاربران حذف خواهد شد." data-trigger="hover" data-placement="top" data-target="delete-notification-{{$notification->id}}">
-									<i class="fa fa-times ml-1"></i> لغو اطلاع رسانی
-								</button>
-							</form>
-							<div id="edit-body" class="collapse">
-								<hr>
-								<form class="row align-items-center" action="{{url("notifications/$notification->id")}}" method="post">
-									@csrf
-									@method('PUT')
-									<div class="col-md-11 form-group">
-										<textarea name="body" rows="3" class="form-control">{{$notification->body}}</textarea>
-									</div>
-									<div class="col-md-1">
-										<button type="submit" class="btn btn-primary btn-block"> ذخیره </button>
-									</div>
-								</form>
-							</div>
-						</div>
-					@endmaster
+					<div class="card-footer text-left">
+						<a href="{{url("tickets/create?nuid={$notification->history->uid}")}}" data-toggle="collapse" class="btn btn-outline-primary ml-2">
+							<i class="fa fa-reply ml-1"></i> پاسخ دادن
+						</a>
+					</div>
 				</div>
 			@endforeach
 		@else

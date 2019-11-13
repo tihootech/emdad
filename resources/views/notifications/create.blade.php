@@ -2,7 +2,7 @@
 @section('main')
 
 	<div class="tile text-left">
-		<a href="{{url("notifications")}}" class="btn btn-outline-info"> تاریخچه اطلاع رسانی </a>
+		<a href="{{url("notifications/history")}}" class="btn btn-outline-info"> تاریخچه اطلاع رسانی </a>
 	</div>
 
 	<div class="tile">
@@ -12,10 +12,38 @@
 			<form action="{{url("notifications")}}" method="post">
 				@csrf
 				<input type="hidden" name="target" value="App\Operator">
-				<div class="my-2">
-					<label for="body"> متن پیغام </label>
-					<textarea name="body" id="body" rows="4" class="form-control" required>{{old('body')}}</textarea>
+				<div class="row justify-content-center">
+					<div class="col-md-12 form-group">
+						<label for="body"> متن اعلان </label>
+						<textarea name="body" id="body" rows="4" class="form-control" required>{{old('body')}}</textarea>
+					</div>
+					<div class="col-md-4 form-group">
+						<label for="region"> منطقه </label>
+						<input type="number" name="region" id="region" value="{{old('region')}}" class="form-control">
+						<small class="text-muted">
+							<i class="fa fa-info-circle ml-1"></i>
+							در صورتی که میخواهید این اعلان فقط برای منطقه خاصی ارسال شود
+							میتوانید عدد منطقه مورد نظر را وارد کنید.
+							در غیر این صورت میتوانید این فیلد را خالی بگذارید.
+						</small>
+					</div>
+					<div class="col-md-6 form-group">
+						<label for="operator"> انتخاب متصدی/متصدیان </label>
+						<select class="select2" name="owner_ids[]" id="operator" multiple>
+							@foreach ($operators as $operator)
+								<option value="{{$operator->id}}"> {{$operator->title()}} </option>
+							@endforeach
+						</select>
+						<small class="text-muted">
+							<i class="fa fa-info-circle ml-1"></i>
+							در صورتی که میخواهید این اعلان فقط برای برخی از متصدیان به صورت انتخابی ارسال شود
+							میتوانید متصدیان مورد نظر خود را از لیست بالا انتخاب کنید.
+							لازم به ذکر است که شما میتوانید یک یا بیش از یک متصدی را انتاب کنید.
+							در غیر این صورت میتوانید این فیلد را خالی بگذارید.
+						</small>
+					</div>
 				</div>
+				<hr>
 				<div class="text-center">
 					<button type="submit" class="btn btn-primary"> اطلاع رسانی </button>
 				</div>
@@ -31,11 +59,29 @@
 		<h4> اطلاع رسانی به موسسات </h4>
 		<hr>
 		@if ($organs->count())
-			<form action="{{url("notifications/organ")}}" method="post">
+			<form action="{{url("notifications")}}" method="post">
 				@csrf
-				<div class="my-2">
-					<label for="body"> متن پیغام </label>
-					<textarea name="body" id="body" rows="4" class="form-control" required>{{old('body')}}</textarea>
+				<input type="hidden" name="target" value="App\Organ">
+				<div class="row justify-content-center">
+					<div class="col-md-12 form-group">
+						<label for="body"> متن اعلان </label>
+						<textarea name="body" id="body" rows="4" class="form-control" required>{{old('body')}}</textarea>
+					</div>
+					<div class="col-md-6 form-group">
+						<label for="organ"> انتخاب موسسه/موسسات </label>
+						<select class="select2" name="owner_ids[]" id="organ" multiple>
+							@foreach ($organs as $organ)
+								<option value="{{$organ->id}}"> {{$organ->title()}} </option>
+							@endforeach
+						</select>
+						<small class="text-muted">
+							<i class="fa fa-info-circle ml-1"></i>
+							در صورتی که میخواهید این اعلان فقط برای برخی از موسسات به صورت انتخابی ارسال شود
+							میتوانید موسسات مورد نظر خود را از لیست بالا انتخاب کنید.
+							لازم به ذکر است که شما میتوانید یک یا بیش از یک موسسه را انتاب کنید.
+							در غیر این صورت میتوانید این فیلد را خالی بگذارید.
+						</small>
+					</div>
 				</div>
 				<div class="text-center">
 					<button type="submit" class="btn btn-primary"> اطلاع رسانی </button>

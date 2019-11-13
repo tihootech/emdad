@@ -54,7 +54,11 @@ class OwnerController extends Controller
 		$owner = $request->owner_type::create($owner_data);
 
 		// create account for owner
-		User::acc_for_owners($acc_data, $owner->id);
+		$user = User::acc_for_owners($acc_data, $owner->id);
+
+		// set user id for owner
+		$owner->user_id = $user->id;
+		$owner->save();
 
 		// redirection
 		return redirect("owners/$type")->withMessage($owner->persian_type().' جدید در سیستم ثبت شد.');

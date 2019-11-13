@@ -28,9 +28,9 @@
                         </li>
                     @endforeach
                 @else
-                    <li class="app-notification__title"> شما پیغام جدیدی ندارید. </li>
+                    <li class="app-notification__title"> شما اعلان جدیدی ندارید. </li>
                 @endif
-                <li class="app-notification__footer"> <a href="{{url("notifications")}}"> مشاهده همه پیغام ها </a> </li>
+                <li class="app-notification__footer"> <a href="{{url("notifications")}}"> مشاهده همه اعلان ها </a> </li>
             </ul>
         </li>
         <!-- User Menu-->

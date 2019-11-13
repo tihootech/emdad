@@ -8,6 +8,6 @@ class Operator extends Owner
 {
     public function title()
     {
-        return $this->full_name();
+        return $this->full_name() . '-' . 'منظقه ' . $this->region;
     }
 }

@@ -9,6 +9,7 @@ use App\Notification;
 use App\User;
 use App\Organ;
 use App\Operator;
+use App\Madadju;
 
 class NotificationController extends Controller
 {
@@ -19,15 +20,24 @@ class NotificationController extends Controller
 		$this->middleware('master')->except(['index']);
 	}
 
+	public function history()
+	{
+		$list = NotificationHistory::latest()->paginate(25);
+		return view('notifications.history', compact('list'));
+	}
+
+	public function manage($id)
+	{
+		$history = NotificationHistory::findOrFail($id);
+		$notifications = $history->list()->paginate(25);
+		return view('notifications.manage', compact('history', 'notifications'));
+	}
+
 	public function index()
 	{
-		if (master()) {
-			$list = NotificationHistory::latest()->paginate(10);
-		}else {
-			$list = Notification::where('user_id', auth()->id())->latest()->orderBy('read')->paginate(10);
-			foreach ($list as $notification) {
-				$notification->mark_as_read();
-			}
+		$list = Notification::where('user_id', auth()->id())->latest()->orderBy('read')->paginate(10);
+		foreach ($list as $notification) {
+			$notification->mark_as_read();
 		}
 		return view('notifications.index', compact('list'));
 	}
@@ -41,20 +51,34 @@ class NotificationController extends Controller
 
 	public function store(Request $request)
 	{
+		// validate request
 		$request->validate([
 			'body'=>'required',
 			'target' => [
 				'required',
 				Rule::in([Operator::class, Organ::class])
 			],
+			'region'=>'nullable|integer',
+			'owner_id'=>'nullable|integer',
 		]);
-		$list = User::whereOwnerType($request->target)->get();
+
+		// create list of owners which notification is for
+		$list = $request->target::query();
+		if ($request->region) {
+			$list = $list->where('region', $request->region);
+		}
+		if ($request->owner_ids && count($request->owner_ids)) {
+			$list = $list->whereIn('id', $request->owner_ids);
+		}
+		$list = $list->get();
+
+		// create notification and notification history in database
 		if($count = $list->count()){
 			$history = NotificationHistory::make($request->target, $request->body);
 			Notification::notify($history->id, $list);
-			return redirect('notifications')->withMessage("اطلاع رسانی به $count کاربر با موفقیت انجام شد");
+			return redirect('notifications/history')->withMessage("اطلاع رسانی به $count کاربر با موفقیت انجام شد");
 		}else {
-			return back()->withError('کاربری برای اطلاع رسانی یافت نشد.');
+			return back()->withError('با اطلاعات وارد شده، کاربری برای اطلاع رسانی یافت نشد.');
 		}
 	}
 
@@ -76,9 +100,15 @@ class NotificationController extends Controller
 		if ($history) {
 			Notification::where('notification_history_id', $history->id)->delete();
 			$history->delete();
-			return back()->withMessage('اطلاع رسانی با موفقیت لغو شد و پیغام مورد نظر از داشبورد کاربران حذف شد.');
+			return back()->withMessage('اطلاع رسانی با موفقیت لغو شد و اعلان مورد نظر از داشبورد کاربران حذف شد.');
 		}else {
 			return back()->withError('Database Error');
 		}
+	}
+
+	public function single_delete(Notification $notification)
+	{
+		$notification->delete();
+		return back()->withMessage('اطلاع رسانی برای کاربر مورد نظر با موفقیت لغو شد.');
 	}
 }

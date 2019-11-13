@@ -43,12 +43,16 @@ class UserForOrgans extends Command
         foreach ($organs as $organ) {
             $phrase = rand(100000,999999);
             if (!$organ->user) {
-                User::create([
+                $user = User::create([
                     'owner_type' => Organ::class,
                     'owner_id' => $organ->id,
                     'username' => $phrase,
                     'password' => bcrypt($phrase),
                 ]);
+                $organ->user_id = $user->id;
+                $organ->save();
+            }else {
+                $organ->user_id = $organ->user->id;
             }
         }
     }
