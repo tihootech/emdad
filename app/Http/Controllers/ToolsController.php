@@ -47,9 +47,11 @@ class ToolsController extends Controller
 				}
 				$total_count = $madadjus->count();
 				$madadjus = $madadjus->paginate(25);
+			}else {
+				$madadjus = null;
+				$total_count = 0;
 			}
 
-			// return view
 			return view('tools.tools', compact('tool', 'madadjus', 'total_count', 'columns'));
 		}else {
 

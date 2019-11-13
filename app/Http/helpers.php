@@ -82,3 +82,16 @@ function persian($class, $plural=false)
         return $plural ? "مددجویان" : "مددجو";
     }
 }
+
+
+function mycompact()
+{
+    $args = func_get_args();
+    $result = [];
+    foreach ($args as $variable) {
+        if (isset($$variable)) {
+            $result[$variable] = $$variable;
+        }
+    }
+    return $result;
+}

@@ -19,10 +19,18 @@
 	<div class="tile">
 		@if ($tool == 'duplicate-madadjus')
 
-			@foreach ($list as $national_code => $madadjus)
-				<h4 class="my-3 text-danger"> <i class="fa fa-arrow-left ml-2"></i> افراد با کد ملی {{$national_code}} </h4>
-				@include('madadjus.table', ['check'=>false])
-			@endforeach
+			@if(count($list))
+				@foreach ($list as $national_code => $madadjus)
+					<h4 class="my-3 text-danger"> <i class="fa fa-arrow-left ml-2"></i> افراد با کد ملی {{$national_code}} </h4>
+					@include('madadjus.table', ['check'=>false])
+				@endforeach
+			@else
+				<div class="alert alert-success">
+					<i class="fa fa-check ml-1"></i>
+					خوشبختانه 2 مددجو با شماره ملی یکسان در سیستم یافت نشد.
+				</div>
+			@endif
+
 		@elseif ($tool == 'incomplete-madadjus')
 			<div class="row">
 				<div class="col-md-3">
@@ -46,7 +54,7 @@
 					</form>
 				</div>
 				<div class="col-md-9">
-					@isset ($madadjus)
+					@if ($madadjus)
 						@if ($madadjus->count())
 							@include('madadjus.table', ['check'=>false])
 							{{$madadjus->appends($_GET)->links()}}
@@ -88,7 +96,7 @@
 							"کد مددجویی"
 							را تیک بزنید و روی دکمه تایید که در پایین قرار دارد کلیک کنید.
 						</div>
-					@endisset
+					@endif
 				</div>
 			</div>
 		@else
