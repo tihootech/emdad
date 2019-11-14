@@ -56,7 +56,7 @@ return [
         'string'  => ' :attribute باید حداکثر :max کاراکتر باشد.',
         'array'   => ' :attribute باید حداکثر :max آیتم داشته باشد.',
     ],
-    'mimes'                => ' :attribute باید یکی از پسوند های رو یه رو را داشته باشد : :values.',
+    'mimes'                => ' :attribute باید یکی از پسوند های زیررا داشته باشد : :values.',
     'mimetypes'            => ' :attribute must be a file of type: :values.',
     'min'                  => [
         'numeric' => ' :attribute باید حداقل :min رقم باشد.',
@@ -153,6 +153,7 @@ return [
         'muid'=> 'کدمددجویی',
         'postcode'=> 'کدپستی',
         'warden_national_code'=> 'کدملی سرپرست',
+        'file'=> 'کدملی سرپرست',
     ],
 
 ];

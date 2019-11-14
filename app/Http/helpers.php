@@ -80,8 +80,69 @@ function persian($class, $plural=false)
     if ($class == \App\Madadju::class) {
         return $plural ? "مددجویان" : "مددجو";
     }
+    if ($class == \App\Master::class) {
+        return "مرکز";
+    }
+    return $class;
+}
+
+function english($class)
+{
+    if ($class == \App\Operator::class) return "operator";
+    if ($class == \App\Organ::class) return "organ";
+    if ($class == \App\Madadju::class) return "madadju";
+    if ($class == \App\Master::class) return "master";
+    return $class;
 }
 
 function rs($length = 10) {
     return substr(str_shuffle(str_repeat($x='123456789ABCDEFGHJKLMNPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
+}
+
+function upload($new_file, $old_file=null)
+{
+    delete_file($old_file);
+    if ($new_file) {
+        $relarive_path = "storage/app/public";
+        $file_name = random_sha(20) . '.' . $new_file->getClientOriginalExtension();
+        $result = $new_file->move(base_path($relarive_path),$file_name);
+        return 'storage/' . $file_name;
+    }else {
+        return null;
+    }
+}
+
+function delete_file($file)
+{
+    if ($file && file_exists($file)) {
+        \File::delete($file);
+    }
+}
+
+function random_sha($l=10)
+{
+	return substr(md5(rand()), 0, $l);
+}
+
+function isMobileDevice() {
+    return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
+}
+
+function prepare_multiple($inputs)
+{
+    $result = [];
+    foreach ($inputs as $key => $array) {
+        if(is_array($array) && count($array)){
+            foreach ($array as $i => $value) {
+                $result[$i][$key] = $value;
+            }
+        }
+    }
+    return $result;
+}
+
+function random_rgba($opacity=null)
+{
+    $opacity = $opacity ?? rand(0,10)/10;
+    return "rgba(".rand(1,255).", ".rand(1,255).", ".rand(1,255).", $opacity)";
 }

@@ -46,6 +46,15 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	min-width: 150px;
 }
 
+.badge-lg {
+	font-size: 85%;
+	padding: 8px 15px;
+}
+
+.text-underlined {
+	text-decoration: underline;
+}
+
 
 /*******************************/
 /* RTL */

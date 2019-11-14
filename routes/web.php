@@ -42,3 +42,12 @@ Route::delete('owners/{type}/{owner_id}', 'OwnerController@destroy');
 
 // tools
 Route::get('tools/{tool?}', 'ToolsController@tools')->name('tools');
+
+// ticket
+Route::get('ticket', 'TicketController@index')->name('ticket.index');
+Route::get('ticket/create', 'TicketController@create');
+Route::post('ticket', 'TicketController@store');
+Route::get('ticket/{uid}', 'TicketController@show');
+Route::get('ticket/message/{uid}', 'TicketController@message_form');
+Route::post('ticket/message/{uid}', 'TicketController@new_message');
+Route::post('ticket/close/{uid}', 'TicketController@close');

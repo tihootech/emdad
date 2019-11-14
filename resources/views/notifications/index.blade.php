@@ -14,7 +14,7 @@
 						</blockquote>
 					</div>
 					<div class="card-footer text-left">
-						<a href="{{url("tickets/create?nuid={$notification->history->uid}")}}" data-toggle="collapse" class="btn btn-outline-primary ml-2">
+						<a href="{{url("ticket/create?nuid={$notification->history->uid}")}}" data-toggle="collapse" class="btn btn-outline-primary ml-2">
 							<i class="fa fa-reply ml-1"></i> پاسخ دادن
 						</a>
 					</div>

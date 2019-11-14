@@ -11,14 +11,12 @@
 					<small> {{$history->body}} </small>
 					<hr>
 					<footer class="blockquote-footer"> {{human_date($history->created_at)}} </footer>
-					@master
-						<footer class="blockquote-footer">
-							این اعلان برای
-							<b class="text-info mx-1"> {{$history->send_to_count()}} </b>
-							{{persian($history->target, false)}}
-							ارسال شده است.
-						</footer>
-					@endmaster
+					<footer class="blockquote-footer">
+						این اعلان برای
+						<b class="text-info mx-1"> {{$history->send_to_count()}} </b>
+						{{persian($history->target, false)}}
+						ارسال شده است.
+					</footer>
 				</blockquote>
 			</div>
 			<div class="card-footer text-left">
@@ -57,6 +55,7 @@
 					<th scope="col"> {{persian($history->target, false)}} </th>
 					<th scope="col"> خوانده شده </th>
 					<th scope="col">  تاریخ خواندن </th>
+					<th scope="col"> ساعت خواندن </th>
 					<th scope="col"> عملیات </th>
 				</tr>
 			</thead>
@@ -73,6 +72,7 @@
 							@endif
 						</td>
 						<td> {{$notification->updated_at ? human_date($notification->updated_at) : '-'}} </td>
+						<td> {{$notification->updated_at ? $notification->updated_at->format('H:i') : '-'}} </td>
 						<td>
 							<form class="d-inline" action="{{url("notifications/single/{$notification->id}")}}" method="post" id="delete-single-notification-{{$history->id}}">
 								@method('DELETE')

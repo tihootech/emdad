@@ -73,3 +73,10 @@
 	</li>
 
 @endmaster
+
+<li>
+	<a class="app-menu__item @if( request()->route()->getName() == 'ticket.index' ) active @endif" href="{{url("ticket")}}">
+		<i class="app-menu__icon fa fa-ticket"></i>
+		<span class="app-menu__label"> تیکت ها </span>
+	</a>
+</li>

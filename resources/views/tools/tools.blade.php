@@ -4,12 +4,12 @@
 	<div class="tile">
 		<div class="row justify-content-center">
 			<div class="col-md-3 my-2">
-				<a href="{{url("tools/duplicate-madadjus")}}" class="btn @if($tool=='duplicate-madadjus') btn-info @else btn-outline-info @endif btn-block">
+				<a href="{{url("tools/duplicate-madadjus")}}" class="btn @if($tool=='duplicate-madadjus') btn-primary @else btn-outline-primary @endif btn-block">
 					مددجویان تکراری
 				</a>
 			</div>
 			<div class="col-md-3 my-2">
-				<a href="{{url("tools/incomplete-madadjus")}}" class="btn @if($tool=='incomplete-madadjus') btn-info @else btn-outline-info @endif btn-block">
+				<a href="{{url("tools/incomplete-madadjus")}}" class="btn @if($tool=='incomplete-madadjus') btn-primary @else btn-outline-primary @endif btn-block">
 					مددجویان با اطلاعات ناقص
 				</a>
 			</div>
