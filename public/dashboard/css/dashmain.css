@@ -13779,10 +13779,10 @@ be a descendant of the grid when it is being dragged.
     display: inline-block;
     width: 20px;
     height: 20px;
-    background-color: #fff;
+    background-color: #FFC107;
     color: #2A5297;
     border-radius: 100%;
-    padding: 0 8px;
+    padding: 0 9px 0 8px;
     position: absolute;
     top: 4px;
     left: 4px;

@@ -100,7 +100,7 @@ class NotificationController extends Controller
 		if ($history) {
 			Notification::where('notification_history_id', $history->id)->delete();
 			$history->delete();
-			return back()->withMessage('اطلاع رسانی با موفقیت لغو شد و اعلان مورد نظر از داشبورد کاربران حذف شد.');
+			return back()->withMessage('اطلاع رسانی با موفقیت لغو شد و اعلامیه مورد نظر از داشبورد کاربران حذف شد.');
 		}else {
 			return back()->withError('Database Error');
 		}

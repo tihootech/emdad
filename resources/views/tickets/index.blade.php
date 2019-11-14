@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('title') لیست تیکت ها @endsection
+@section('title') لیست نامه ها @endsection
 @section('main')
 
 	<div class="tile">
@@ -7,26 +7,26 @@
 			<div class="text-center">
 				<a href="{{url("ticket?status=all")}}" class="mx-1 btn @if($status == 'all') btn-primary @else btn-outline-primary @endif">
 					<i class="fa fa-list ml-1"></i>
-					همه تیکت ها
+					همه نامه ها
 				</a>
 				<a href="{{url("ticket?status=open")}}" class="mx-1 btn @if($status == 'open') btn-primary @else btn-outline-primary @endif">
 					<i class="fa fa-hourglass-2 ml-1"></i>
-					تیکت های باز
+					نامه های باز
 				</a>
 				<a href="{{url("ticket?status=answered")}}" class="mx-1 btn @if($status == 'answered') btn-primary @else btn-outline-primary @endif">
 					<i class="fa fa-check ml-1"></i>
-					تیکت های پاسخ داده شده
+					نامه های پاسخ داده شده
 				</a>
 				<a href="{{url("ticket?status=closed")}}" class="mx-1 btn @if($status == 'closed') btn-primary @else btn-outline-primary @endif">
 					<i class="fa fa-times ml-1"></i>
-					تیکت های بسته شده
+					نامه های بسته شده
 				</a>
 			</div>
 		@else
 			<div class="text-left">
 				<a href="{{url("ticket/create")}}" class="btn btn-outline-primary">
 					<i class="fa fa-plus ml-1"></i>
-					ایجاد تیکت جدید
+					ایجاد نامه جدید
 				</a>
 			</div>
 		@endmaster
@@ -46,7 +46,7 @@
 						@endmaster
 						<th scope="col"> وضعیت </th>
 						<th scope="col"> اولویت </th>
-						<th scope="col"> نوع تیکت </th>
+						<th scope="col"> نوع نامه </th>
 						<th scope="col"> عملیات </th>
 					</tr>
 				</thead>
@@ -81,7 +81,7 @@
 			{{$tickets->links()}}
 		@else
 			<div class="alert alert-warning">
-				تیکتی یافت نشد.
+				نامهی یافت نشد.
 			</div>
 		@endif
 

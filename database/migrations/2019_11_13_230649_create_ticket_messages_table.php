@@ -15,7 +15,7 @@ class CreateTicketMessagesTable extends Migration
     {
         Schema::create('ticket_messages', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('author_id');
+            $table->unsignedInteger('author_id'); // its a user id
             $table->unsignedInteger('ticket_id');
             $table->text('body');
             $table->string('file')->nullable();

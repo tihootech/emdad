@@ -14,7 +14,7 @@
                                 @master
                                     <a href="{{url('owners/operator')}}" class="btn btn-outline-light mx-1">
                                         <i class="fa fa-user-secret ml-1"></i>
-                                        مدیریت متصدیان
+                                        مدیریت مددکارها
                                     </a>
                                     <a href="{{url('owners/organ')}}" class="btn btn-outline-light mx-1">
                                         <i class="fa fa-bank ml-1"></i>

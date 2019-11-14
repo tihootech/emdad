@@ -12,7 +12,7 @@
 			<form class="d-inline" action="{{url("ticket/close/$ticket->uid")}}" method="post">
 				@csrf
 				<button type="submit" class="btn btn-outline-danger mx-1">
-					<i class="fa fa-times ml-1"></i> بستن تیکت
+					<i class="fa fa-times ml-1"></i> بستن نامه
 				</button>
 			</form>
 		@endif
@@ -25,8 +25,8 @@
 			@if ($ticket->notification_history)
 				<div class="alert alert-info my-3">
 					<i class="fa fa-info-circle ml-1"></i>
-					این تیکت مربوط به اعلان
-					<a href="{{url("notifications/history/manage/$ticket->notification_history->id")}}" class="mx-1 text-underlined">
+					این نامه مربوط به اعلامیه
+					<a href="{{url("notifications/history/manage/{$ticket->notification_history->id}")}}" class="mx-1 text-underlined">
 						{{short($ticket->notification_history->body)}}
 					</a>
 					میباشد.
@@ -37,7 +37,7 @@
 		@if ($ticket->status == 'closed')
 			<div class="alert alert-warning my-3">
 				<i class="fa fa-warning ml-1"></i>
-				این تیکت بسته شده است.
+				این نامه بسته شده است.
 				برای باز کردن آن کافیست پاسخ جدید درج کنید.
 			</div>
 		@endif
@@ -74,6 +74,18 @@
 				</div>
 
 			@endforeach
+
+			@if ($ticket->notification_history)
+				<div class="card bg-info text-light">
+					<div class="card-header">
+						<h5> متن اعلامیه </h5>
+					</div>
+					<div class="card-body">
+						{{$ticket->notification_history->body}}
+					</div>
+				</div>
+			@endif
+
 		</div>
 
 	</div>

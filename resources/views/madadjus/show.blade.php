@@ -22,7 +22,7 @@
 								<b class="text-danger mx-1"> شخص را رد کرد ({{$introduce->information}}) </b>
 							@endif
 							@unless ($introduce->confirmed)
-								<span class="text-info mx-1"> لازم به ذکر است که هنوز وضعیت این شخص توسط متصدیان تایید نشده است. </span>
+								<span class="text-info mx-1"> لازم به ذکر است که هنوز وضعیت این شخص توسط مددکارها تایید نشده است. </span>
 							@endunless
 						</li>
 					@endforeach

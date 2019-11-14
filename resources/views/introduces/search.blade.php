@@ -24,7 +24,7 @@
 			</select>
 		</div>
 		<div class="col-md-4 form-group">
-			<label for="operator"> جستجو بر اساس متصدی </label>
+			<label for="operator"> جستجو بر اساس مددکار </label>
 			<select class="select2" name="operators[]" id="operator" multiple>
 				@foreach ($operators as $operator)
 					<option @if( in_array($operator->id, request('operators') ?? []) ) selected @endif value="{{$operator->id}}">

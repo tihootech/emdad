@@ -21,7 +21,7 @@ class CreateMastersTable extends Migration
         });
 
         App\Master::create([
-            'first_name' => 'متصدی',
+            'first_name' => 'مددکار',
             'last_name' => 'اضلی',
         ]);
 

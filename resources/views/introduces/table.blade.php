@@ -7,7 +7,7 @@
 				<th scope="col"> موسسه معرفی شده </th>
 			@endoperator
 			@master
-				<th scope="col"> متصدی معرفی کننده </th>
+				<th scope="col"> مددکار معرفی کننده </th>
 			@endmaster
 			<th scope="col"> وضعیت </th>
 			<th scope="col"> تاریخ معرفی </th>

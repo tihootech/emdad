@@ -22,7 +22,7 @@ class OwnerController extends Controller
 	{
 		$class_name = class_name($type);
 		$owners = $class_name::latest()->paginate(20);
-		$persian_type = $type == 'operator' ? 'متصدی' : 'موسسه';
+		$persian_type = $type == 'operator' ? 'مددکار' : 'موسسه';
 		return view('owners.index', compact('owners', 'type', 'persian_type'));
 	}
 

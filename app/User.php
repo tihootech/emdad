@@ -48,6 +48,11 @@ class User extends Authenticatable
         return $this->hasMany(Notification::class)->whereRead(0);
     }
 
+    public function new_tickets()
+    {
+        return master() ? Ticket::whereStatus('open')->get() : Ticket::where('user_id', $this->id)->whereStatus('answered')->get();
+    }
+
     public function region()
     {
         $owner = $this->owner;

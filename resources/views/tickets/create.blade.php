@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('title') ایجاد تیکت جدید @endsection
+@section('title') ایجاد نامه جدید @endsection
 @section('main')
 	<div class="tile">
 
@@ -20,7 +20,7 @@
 				</select>
 			</div>
 			<div class="col-md-2 form-group">
-				<label for="type"> نوع تیکت </label>
+				<label for="type"> نوع نامه </label>
 				<select class="form-control" name="type" id="type">
 					<option value="official" @if(old('type') == 'official') selected @endif> اداری </option>
 					<option value="complaint" @if(old('type') == 'complaint') selected @endif> شکایت </option>
@@ -32,7 +32,7 @@
 			</div>
 
 			<div class="col-md-12 form-group">
-				<label for="body"> متن تیکت </label>
+				<label for="body"> متن نامه </label>
 				<textarea name="body" id="body" rows="8" class="form-control" required>{{old('body')}}</textarea>
 			</div>
 

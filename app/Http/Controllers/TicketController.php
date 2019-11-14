@@ -53,7 +53,7 @@ class TicketController extends Controller
         TicketMessage::create($ticket_message_data);
 
         //redirection
-        return redirect('ticket')->withMessage('تیکت شما با موفقیت ایجاد شد.');
+        return redirect('ticket')->withMessage('نامه شما با موفقیت ایجاد شد.');
     }
 
     public function show($uid)
@@ -93,7 +93,7 @@ class TicketController extends Controller
         $ticket = Ticket::where('uid', $uid)->firstOrFail();
         $ticket->status = 'closed';
         $ticket->save();
-        return redirect("ticket")->withMessage('تیکت مورد نظر بسته شد.');
+        return redirect("ticket")->withMessage('نامه مورد نظر بسته شد.');
     }
 
     public static function validate_ticket()

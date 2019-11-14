@@ -14,8 +14,8 @@
         </li> --}}
         <!--Notification Menu-->
         <li class="dropdown">
-            <a class="app-nav__item p-relative" href="#" data-toggle="dropdown" aria-label="Show notifications">
-                <i class="fa fa-bell-o fa-lg"></i>
+            <a class="app-nav__item p-relative" href="#" data-toggle="dropdown">
+                <i class="fa fa-bell fa-lg"></i>
                 @if ($ncount = auth()->user()->fresh_notifications->count())
                     <span class="app-notification__number">{{$ncount}}</span>
                 @endif
@@ -28,9 +28,30 @@
                         </li>
                     @endforeach
                 @else
-                    <li class="app-notification__title"> شما اعلان جدیدی ندارید. </li>
+                    <li class="app-notification__title"> شما اعلامیه جدیدی ندارید. </li>
                 @endif
-                <li class="app-notification__footer"> <a href="{{url("notifications")}}"> مشاهده همه اعلان ها </a> </li>
+                <li class="app-notification__footer"> <a href="{{url("notifications")}}"> مشاهده همه اعلامیه ها </a> </li>
+            </ul>
+        </li>
+        <!--Ticket Menu-->
+        <li class="dropdown">
+            <a class="app-nav__item p-relative" href="#" data-toggle="dropdown">
+                <i class="fa fa-envelope fa-lg"></i>
+                @if ($tcount = auth()->user()->new_tickets()->count())
+                    <span class="app-notification__number">{{$tcount}}</span>
+                @endif
+            </a>
+            <ul class="app-notification dropdown-menu text-right">
+                @if (auth()->user()->new_tickets()->count())
+                    @foreach (auth()->user()->new_tickets() as $ticket)
+                        <li class="app-notification__item">
+                            <a href="{{url("ticket")}}"> {{$ticket->title}} </a>
+                        </li>
+                    @endforeach
+                @else
+                    <li class="app-notification__title"> شما نامه جدیدی ندارید. </li>
+                @endif
+                <li class="app-notification__footer"> <a href="{{url("ticket")}}"> مشاهده همه نامه ها </a> </li>
             </ul>
         </li>
         <!-- User Menu-->

@@ -12,7 +12,7 @@
 						<th scope="col"> خطاب به </th>
 						<th scope="col"> متن </th>
 						<th scope="col"> تاریخ </th>
-						<th scope="col" data-toggle="popover" data-content="این اعلان برای چند کاربر ارسال شده است." data-placement="top" data-trigger="hover"> تعداد کاربران </th>
+						<th scope="col" data-toggle="popover" data-content="این اعلامیه برای چند کاربر ارسال شده است." data-placement="top" data-trigger="hover"> تعداد کاربران </th>
 						<th scope="col"> عملیات </th>
 					</tr>
 				</thead>

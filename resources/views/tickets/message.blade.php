@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('title') درج پاسخ برای تیکت {{$ticket->uid}} @endsection
+@section('title') درج پاسخ برای نامه {{$ticket->uid}} @endsection
 @section('main')
 	<div class="tile">
 

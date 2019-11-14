@@ -12,7 +12,7 @@
 					<hr>
 					<footer class="blockquote-footer"> {{human_date($history->created_at)}} </footer>
 					<footer class="blockquote-footer">
-						این اعلان برای
+						این اعلامیه برای
 						<b class="text-info mx-1"> {{$history->send_to_count()}} </b>
 						{{persian($history->target, false)}}
 						ارسال شده است.
@@ -26,7 +26,7 @@
 				<form class="d-inline" action="{{url("notifications/{$history->id}")}}" method="post" id="delete-notification-history">
 					@method('DELETE')
 					@csrf
-					<button type="button" class="btn btn-outline-danger delete" data-toggle="popover" data-content="با لغو اطلاع رسانی، اعلان فرستاده شده از داشبرد تمام کاربران حذف خواهد شد." data-trigger="hover" data-placement="top" data-target="delete-notification-history">
+					<button type="button" class="btn btn-outline-danger delete" data-toggle="popover" data-content="با لغو اطلاع رسانی، اعلامیه فرستاده شده از داشبرد تمام کاربران حذف خواهد شد." data-trigger="hover" data-placement="top" data-target="delete-notification-history">
 						<i class="fa fa-times ml-1"></i> لغو اطلاع رسانی
 					</button>
 				</form>

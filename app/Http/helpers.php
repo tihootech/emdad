@@ -72,7 +72,7 @@ function class_name($input, $prefix='App\\')
 function persian($class, $plural=false)
 {
     if ($class == \App\Operator::class) {
-        return $plural ? "متصدیان" : "متصدی";
+        return $plural ? "مددکارها" : "مددکار";
     }
     if ($class == \App\Organ::class) {
         return $plural ? "موسسات" : "موسسه";

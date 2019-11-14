@@ -32,6 +32,6 @@ class Owner extends Model
 	public function persian_type()
 	{
 		$type = $this->type();
-		return $type == 'operator' ? 'متصدی' : 'موسسه';
+		return $type == 'operator' ? 'مددکار' : 'موسسه';
 	}
 }

@@ -6,7 +6,7 @@
 	</div>
 
 	<div class="tile">
-		<h4> اطلاع رسانی به متصدیان </h4>
+		<h4> اطلاع رسانی به مددکارها </h4>
 		<hr>
 		@if ($operators->count())
 			<form action="{{url("notifications")}}" method="post">
@@ -14,7 +14,7 @@
 				<input type="hidden" name="target" value="App\Operator">
 				<div class="row justify-content-center">
 					<div class="col-md-12 form-group">
-						<label for="body"> متن اعلان </label>
+						<label for="body"> متن اعلامیه </label>
 						<textarea name="body" id="body" rows="4" class="form-control" required>{{old('body')}}</textarea>
 					</div>
 					<div class="col-md-4 form-group">
@@ -22,13 +22,13 @@
 						<input type="number" name="region" id="region" value="{{old('region')}}" class="form-control">
 						<small class="text-muted">
 							<i class="fa fa-info-circle ml-1"></i>
-							در صورتی که میخواهید این اعلان فقط برای منطقه خاصی ارسال شود
+							در صورتی که میخواهید این اعلامیه فقط برای منطقه خاصی ارسال شود
 							میتوانید عدد منطقه مورد نظر را وارد کنید.
 							در غیر این صورت میتوانید این فیلد را خالی بگذارید.
 						</small>
 					</div>
 					<div class="col-md-6 form-group">
-						<label for="operator"> انتخاب متصدی/متصدیان </label>
+						<label for="operator"> انتخاب مددکار/مددکارها </label>
 						<select class="select2" name="owner_ids[]" id="operator" multiple>
 							@foreach ($operators as $operator)
 								<option value="{{$operator->id}}"> {{$operator->title()}} </option>
@@ -36,10 +36,10 @@
 						</select>
 						<small class="text-muted">
 							<i class="fa fa-info-circle ml-1"></i>
-							در صورتی که میخواهید این اعلان فقط برای برخی از متصدیان به صورت انتخابی ارسال شود
-							میتوانید متصدیان مورد نظر خود را از لیست بالا انتخاب کنید.
+							در صورتی که میخواهید این اعلامیه فقط برای برخی از مددکارها به صورت انتخابی ارسال شود
+							میتوانید مددکارها مورد نظر خود را از لیست بالا انتخاب کنید.
 							در غیر این صورت میتوانید این فیلد را خالی بگذارید.
-							لازم به ذکر است که شما میتوانید یک یا بیش از یک متصدی را انتخاب کنید.
+							لازم به ذکر است که شما میتوانید یک یا بیش از یک مددکار را انتخاب کنید.
 						</small>
 					</div>
 				</div>
@@ -51,7 +51,7 @@
 		@else
 			<div class="alert alert-warning">
 				<i class="fa fa-warning ml-1"></i>
-				هنوز هیچ متصدی در سیستم تعریف نشده است.
+				هنوز هیچ مددکار در سیستم تعریف نشده است.
 			</div>
 		@endif
 	</div>
@@ -64,7 +64,7 @@
 				<input type="hidden" name="target" value="App\Organ">
 				<div class="row justify-content-center">
 					<div class="col-md-12 form-group">
-						<label for="body"> متن اعلان </label>
+						<label for="body"> متن اعلامیه </label>
 						<textarea name="body" id="body" rows="4" class="form-control" required>{{old('body')}}</textarea>
 					</div>
 					<div class="col-md-6 form-group">
@@ -76,7 +76,7 @@
 						</select>
 						<small class="text-muted">
 							<i class="fa fa-info-circle ml-1"></i>
-							در صورتی که میخواهید این اعلان فقط برای برخی از موسسات به صورت انتخابی ارسال شود
+							در صورتی که میخواهید این اعلامیه فقط برای برخی از موسسات به صورت انتخابی ارسال شود
 							میتوانید موسسات مورد نظر خود را از لیست بالا انتخاب کنید.
 							در غیر این صورت میتوانید این فیلد را خالی بگذارید.
 							لازم به ذکر است که شما میتوانید یک یا بیش از یک موسسه را انتخاب کنید.

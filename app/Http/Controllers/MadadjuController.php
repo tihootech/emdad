@@ -195,6 +195,7 @@ class MadadjuController extends Controller
 
         if (only_operator()) {
             $data['region'] = auth()->user()->region();
+            $data['operator_id'] = auth()->id();
         }
         $data['birthday'] = persian_to_carbon($data['birthday']);
 
