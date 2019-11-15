@@ -175,7 +175,13 @@
 			<div class="col-md-12 my-2">
 				<div class="card">
 					<div class="card-body">
-						<b> تجربه : </b> <span class="text-info"> {{$madadju->work_experience ? 'بلی' : 'خیر'}}  </span>
+						<b> تجربه : </b>
+						<span class="text-info">
+							{{$madadju->work_experience ? 'بلی' : 'خیر'}}
+							@if ($madadju->work_experience && $madadju->experience)
+								({{$madadju->experience}})
+							@endif
+						</span>
 					</div>
 				</div>
 			</div>
