@@ -101,7 +101,7 @@ $(document).on('change', '#education-grade', function () {
 	var value = $(this).val();
 	var target = $('#education-field');
 	var div = target.parents('.form-group')
-	if (value == 'سیکل') {
+	if (value == 'سیکل' || value=='بی سواد') {
 		div.hide();
 		target.prop('required',false);
 	}else {

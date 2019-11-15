@@ -55,13 +55,13 @@ function short($string, $n=100)
 function current_organ_id()
 {
     $user = auth()->user();
-    return $user && $user->is_organ() ? $user->owner_id : null;
+    return $user && $user->is_organ() ? $user->owner_id : 0;
 }
 
 function current_operator_id()
 {
     $user = auth()->user();
-    return $user && $user->is_operator() ? $user->owner_id : null;
+    return $user && $user->is_operator() ? $user->owner_id : 0;
 }
 
 function class_name($input, $prefix='App\\')

@@ -36,7 +36,7 @@ class ToolsController extends Controller
 
 			// find madadju columns and remove first and last two items from columns
 			$columns = \Schema::getColumnListing('madadjus');
-			array_shift($columns); array_splice($columns, -2);
+			array_shift($columns); array_shift($columns); array_splice($columns, -2);
 
 			// find madadjus with incomplete information
 			if ($request->filters) {

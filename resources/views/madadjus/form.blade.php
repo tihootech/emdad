@@ -138,8 +138,8 @@
 			</div>
 
 			<div class="col-md-12 form-group">
-				<label for="skill"> مهارت </label>
-				<input type="text" class="form-control" id="skill" name="skill" value="{{old('skill') ?? $madadju->skill}}">
+				<label for="skill"> <small><i class="fa fa-asterisk ml-1 text-danger"></i></small> مهارت </label>
+				<input type="text" class="form-control" id="skill" name="skill" value="{{old('skill') ?? $madadju->skill}}" قثضعهقثی>
 			</div>
 
 			<div class="col-md-5 form-group">
@@ -154,10 +154,16 @@
 
 			<div class="col-md-2 form-group">
 				<label for="work-experience"> تجربه </label>
-				<select class="form-control" name="work_experience" id="work-experience" required>
+				<select class="form-control" name="work_experience" id="work-experience" required
+					onchange="$('#experience-div').slideToggle()">
 					<option @if( select_old('work_experience', 0, $madadju) ) selected @endif value="0"> خیر </option>
 					<option @if( select_old('work_experience', 1, $madadju) ) selected @endif value="1"> بله </option>
 				</select>
+			</div>
+
+			<div class="col-md-12 form-group @unless($madadju->work_experience) hidden @endunless" id="experience-div">
+				<label for="experience"> تجارب شخص </label>
+				<input type="text" class="form-control" id="experience" name="experience" value="{{old('experience') ?? $madadju->experience}}">
 			</div>
 
 			<hr class="w-100">

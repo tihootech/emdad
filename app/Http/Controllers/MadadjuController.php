@@ -176,15 +176,17 @@ class MadadjuController extends Controller
             "male" => "required|boolean",
             "education_grade" => "required|string",
             "education_field" => "nullable|string",
-            "skill" => "nullable|string",
+            "skill" => "required|string",
             "favourites" => "nullable|string",
-            "region" => "nullable|integer",
+            "region" => "required|integer",
             "insurance_number" => "nullable|string",
             "telephone" => "nullable|string|digits:11",
             "mobile" => "required|string|digits:11",
             "married" => "required|boolean",
             "military_status" => "required|string",
             "warden_name" => "required|string",
+            "work_experience" => "required|boolean",
+            "experience" => "nullable|string",
             "muid" => "required|string|unique:madadjus,muid,$id",
             "address" => "required|string",
             "warden_national_code" => [
@@ -195,8 +197,11 @@ class MadadjuController extends Controller
 
         if (only_operator()) {
             $data['region'] = auth()->user()->region();
-            $data['operator_id'] = auth()->id();
+            $data['operator_id'] = auth()->user()->owner_id;
+        }else {
+            $data['operator_id'] = 0;
         }
+
         $data['birthday'] = persian_to_carbon($data['birthday']);
 
         return $data;
