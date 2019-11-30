@@ -33,6 +33,9 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('master', function () {
             return master();
         });
+        Blade::if('notmaster', function () {
+            return !master();
+        });
         Blade::if('only_organ', function () {
             return only_organ();
         });

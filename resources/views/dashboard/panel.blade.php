@@ -74,6 +74,15 @@
 
 @endmaster
 
+@notmaster
+<li>
+	<a class="app-menu__item @if(active('notifications')) active @endif" href="{{url("notifications")}}">
+		<i class="app-menu__icon fa fa-bullhorn"></i>
+		<span class="app-menu__label"> اطلاعیه ها </span>
+	</a>
+</li>
+@endnotmaster
+
 <li>
 	<a class="app-menu__item @if( request()->route()->getName() == 'ticket.index' ) active @endif" href="{{url("ticket")}}">
 		<i class="app-menu__icon fa fa-ticket"></i>

@@ -70,8 +70,8 @@ class MadadjuController extends Controller
         }
 
         // education filed
-        if ($phrase = $request->education_filed) {
-            $query = $query->where('education_filed', $phrase);
+        if ($phrase = $request->education_field) {
+            $query = $query->where('education_field', 'like', "%$phrase%");
         }
 
         // skill
