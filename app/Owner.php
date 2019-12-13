@@ -15,7 +15,11 @@ class Owner extends Model
 
     public function full_name()
     {
-        return $this->first_name .' '. $this->last_name;
+		if ($this->first_name == $this->last_name) {
+			return $this->first_name;
+		}else {
+			return $this->first_name .' '. $this->last_name;
+		}
     }
 
 	public function type()

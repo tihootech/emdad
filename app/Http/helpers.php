@@ -20,7 +20,13 @@ function select_old($key, $value, $object)
 function master()
 {
     $user = auth()->user();
-    return $user && $user->owner_type == \App\Master::class;
+    return $user && ( $user->owner_type == \App\Master::class || $user->owner_type == \App\Root::class);
+}
+
+function root()
+{
+    $user = auth()->user();
+    return $user && $user->owner_type == \App\Root::class;
 }
 
 function operator()

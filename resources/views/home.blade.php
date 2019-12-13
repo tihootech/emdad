@@ -1,44 +1,75 @@
 @extends('layouts.dashboard')
 
 @section('main')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card text-center">
-                    <div class="card text-white bg-info">
-                        <div class="card-header">
-                            <h3> میانبر ها </h3>
-                        </div>
-                        <div class="card-body">
-                            @operator
-                                @master
-                                    <a href="{{url('owners/operator')}}" class="btn btn-outline-light mx-1">
-                                        <i class="fa fa-user-secret ml-1"></i>
-                                        مدیریت مددکارها
+
+
+    @root
+
+        <div class="tile">
+            <table class="table table-bordered table-hover table-striped table-responsive-lg">
+                <thead>
+                    <tr>
+                        <th> ردیف </th>
+                        <th> مددکار </th>
+                        <th> منطقه </th>
+                        <th> تعداد ثبت مددجو </th>
+                        <th> تعداد معرفی مددجو </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($operators as $i => $operator)
+                        <tr>
+                            <th> {{$i+1}} </th>
+                            <td> {{$operator->full_name()}} </td>
+                            <td> {{$operator->region}} </td>
+                            <td> {{$operator->madadjus->count()}} </td>
+                            <td> {{$operator->introduces->count()}} </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+    @else
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card text-center">
+                        <div class="card text-white bg-info">
+                            <div class="card-header">
+                                <h3> میانبر ها </h3>
+                            </div>
+                            <div class="card-body">
+                                @operator
+                                    @master
+                                        <a href="{{url('owners/operator')}}" class="btn btn-outline-light mx-1">
+                                            <i class="fa fa-user-secret ml-1"></i>
+                                            مدیریت مددکارها
+                                        </a>
+                                        <a href="{{url('owners/organ')}}" class="btn btn-outline-light mx-1">
+                                            <i class="fa fa-bank ml-1"></i>
+                                            مدیریت موسسات
+                                        </a>
+                                        <hr>
+                                    @endmaster
+                                    <a href="{{url('madadju')}}" class="btn btn-outline-light mx-1">
+                                        <i class="fa fa-male ml-1"></i>
+                                        مدیریت مدد جویان
                                     </a>
-                                    <a href="{{url('owners/organ')}}" class="btn btn-outline-light mx-1">
-                                        <i class="fa fa-bank ml-1"></i>
-                                        مدیریت موسسات
+                                @endoperator
+                                @only_organ
+                                    <a href="{{url('introduce')}}" class="btn btn-outline-light mx-1">
+                                        <i class="fa fa-list ml-1"></i>
+                                        لیست کامل افراد معرفی شده
                                     </a>
-                                    <hr>
-                                @endmaster
-                                <a href="{{url('madadju')}}" class="btn btn-outline-light mx-1">
-                                    <i class="fa fa-male ml-1"></i>
-                                    مدیریت مدد جویان
-                                </a>
-                            @endoperator
-                            @only_organ
-                                <a href="{{url('introduce')}}" class="btn btn-outline-light mx-1">
-                                    <i class="fa fa-list ml-1"></i>
-                                    لیست کامل افراد معرفی شده
-                                </a>
-                            @endonly_organ
+                                @endonly_organ
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endroot
 
     @only_organ
         @if ($user->owner->fresh_introduces->count())

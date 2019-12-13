@@ -10,4 +10,14 @@ class Operator extends Owner
     {
         return $this->full_name() . '-' . 'منظقه ' . $this->region;
     }
+
+    public function madadjus()
+    {
+        return $this->hasMany(Madadju::class);
+    }
+
+    public function introduces()
+    {
+        return $this->hasMany(Introduce::class);
+    }
 }
